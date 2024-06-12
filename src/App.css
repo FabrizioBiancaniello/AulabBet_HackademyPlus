@@ -24,10 +24,15 @@ body{
   background: rgb(209, 209, 18);
 }
 
-
+.main-title {
+  font-size: calc(50px + 3vw);
+  color: transparent;
+  -webkit-text-stroke-width: calc(2px + 0.05vw);
+  -webkit-text-stroke-color: rgb(220, 220, 43);
+}
 
 h1{
-  color: rgb(201, 201, 29);
+  /* color: rgb(201, 201, 29); */
 }
 .bg-p{
   background-color: rgb(220, 220, 43) !important;

@@ -76,7 +76,7 @@ function App() {
       <div className="container mb-5">
         <div className="row">
             <div className="col-12">
-                <h1 className="display-1 text-center border-bottom py-5 my-5">AULAB BET</h1>
+                <h1 className="main-title text-center border-bottom py-5 my-5">AULAB BET</h1>
             </div>
         </div>
     </div>
