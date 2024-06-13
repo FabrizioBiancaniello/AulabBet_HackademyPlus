@@ -87,7 +87,6 @@ function App() {
 
 
   useEffect(()=>{
-    // console.log(auth.currentUser.uid)
     getBet();
 
   },[])
@@ -105,8 +104,7 @@ function App() {
     </div>
     <div>
       <h2 className='text-center'>CLASSIFICA</h2>
-
-        {bets && bets.toSorted((a, b)=>b.averageVote-a.averageVote).map((bet)=>{
+        {bets && bets.toSorted((a, b)=>b.averageVote-a.averageVote).slice(0, 10).map((bet)=>{
           return(
             <div className='bg-secondary text-center border' key={bet.id}>{bet.averageVote} - {bet.name}</div>
           )
@@ -126,8 +124,8 @@ function App() {
                       </h2>
                       <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div className="accordion-body p-0">
+                          {utente ?
                             <div className="bet-create">
-                              {/* ALERT  */}
                               {message && 
                                 <div className={`alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success" }`} role="alert">
                                   {message.body}
@@ -141,6 +139,11 @@ function App() {
                                     <button className="btn-custom mt-4 fs-5" onClick={setBet}>AGGIUNGI</button>
                                 </div>
                             </div>
+                            :
+                            <div className="bet-create d-flex justify-content-center align-items-center">
+                              <p>Non puoi creare una nuova scommessa se prima non sei un utente loggato</p>
+                            </div>
+                            }
                         </div>
                     </div>
                     </div>
