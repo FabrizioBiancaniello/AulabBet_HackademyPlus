@@ -82,7 +82,7 @@ function App() {
   }
 
   function calcAverageVote(array){
-    return (array.reduce((acc, el)=> acc+el.vote, 0)/array.length) || 0
+    return +(array.reduce((acc, el)=> acc+el.vote, 0)/array.length).toFixed(1) || 0
   }
 
 
