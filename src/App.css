@@ -1,6 +1,6 @@
 body {
   background: #141414ea;
-  filter: contrast(100%) brightness(100%);
+
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -181,17 +181,10 @@ body {
     transform: rotate(360deg);
   }
 }
-/* .bet-box::before{
-  content: '';
-  width: calc(100%);
-  height: calc(100%);
-  background-color: darkred;
-  position: absolute;
-  border-radius: 10px;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-} */
+
+.classifica-titles{
+  font-size: calc(7px + 0.7vw);
+}
 
 
 .createBetContainer {
