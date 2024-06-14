@@ -33,38 +33,9 @@ export default function AccordionBet({ setBet, bets, message, setMessage, utente
                                 </div>
                             }
                         </div>
-
-                        {/*<div className="accordion accordion-flush accordion-box bg-t" id="accordionFlushExample">
-                            <div className="accordion-item bg-t ">
-                                <h2 className="accordion-header ">
-                                    <button className="accordion-button collapsed accordion-button rounded-top-3" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        NUOVA BET
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
-                                    <div className="accordion-body p-0">
-                                        <div className="bet-create">
-
-                                            {message &&
-                                                <div className={`alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
-                                                    {message.body}
-                                                </div>
-                                            }
-                                            <div className="d-flex flex-column">
-                                                <label className="fs-5 mt-3 fw-bold text-cus" htmlFor="description">Descrizione Scommessa:</label>
-                                                <textarea className='p-2' onChange={(event) => setBetDescription(event.target.value)} value={betDescription} id="description"></textarea>
-                                            </div>
-                                            <div className="d-flex justify-content-center">
-                                                <button className="btn-custom mt-4 fs-5" onClick={setBet}>AGGIUNGI</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                     {/* RIGHT COL  */}
-                    <div className="col-12 col-md-7 px-3 rankingContainer rounded-3 shadow-lg">
+                    <div className="col-12 col-md-7 px-3 rankingContainer rounded-3">
                         <h3 className='text-center my-2'>CLASSIFICA</h3>
                         <div className='row'>
                             <div className="col-12">

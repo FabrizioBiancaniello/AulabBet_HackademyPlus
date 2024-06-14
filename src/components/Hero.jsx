@@ -1,6 +1,7 @@
 export default function Hero() {
     return (
         <>
+        <div className="grain"></div>
             <div className="container mb-3">
                 <div className="row">
                     <div className="col-12">
