@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-export default function AccordionBet({ setBet, bets, message, setMessage, utente }) {
+export default function AccordionBet({ setBet, bets, utente }) {
     const [betPlayerName, setBetPlayerName] = useState("");
     const [betDescription, setBetDescription] = useState("");
+    const [message, setMessage] = useState("");
 
     return (
         <>
@@ -29,7 +30,7 @@ export default function AccordionBet({ setBet, bets, message, setMessage, utente
                                 </div>
                                 :
                                 <div className='d-flex justify-content-center align-items-center h-100'>
-                                    <p>EFFETTUA IL LOGIN O REGISTRATI PER PIAZZARE LA TUA BET</p>
+                                    <p className='text-center'>EFFETTUA IL LOGIN O REGISTRATI PER INSERIRE LA TUA BET</p>
                                 </div>
                             }
                         </div>

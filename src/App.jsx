@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, addDoc, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
+import { collection, doc, addDoc, getDoc, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
@@ -20,7 +20,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-//Inizialize Firebase Auth
 const auth = getAuth(app)
 
 
@@ -28,8 +27,12 @@ const auth = getAuth(app)
 function App() {
   const [utente, setUtente] = useState(null);
   const [bets, setBets] = useState("");
-  const [message, setMessage] = useState("");
 
+    async function getUtente(user){
+        const docRef = doc(db, "users", user);
+        const docSnap = await getDoc(docRef);
+        setUtente(docSnap.data())
+    }
 
   async function getBet() {
     const colRef = collection(db, "bets");
@@ -46,6 +49,7 @@ function App() {
         setBets(items.reverse())
     });
   }
+
   async function setBet(description, setDescription, setMessage, utente){
     if(description.length > 10){
       const docRef = await addDoc(collection(db, "bets"), {
@@ -56,7 +60,6 @@ function App() {
           vote: []
       });
       const betRef = doc(db, "users", utente.id);
-
       await updateDoc(betRef, {bets: arrayUnion(docRef.id)})
       //Reset Campi
       setDescription("");
@@ -75,6 +78,8 @@ function App() {
   async function updateVote(betId, userId, value){
     const betRef = doc(db, "bets", betId);
     await updateDoc(betRef, {vote: arrayUnion({playerId: userId, vote: value})})
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, {voted: arrayUnion({"betId": betId, "vote": value})})
   } 
   function notVoted(array, userId){
     let filtered = array.filter((obj)=> obj.playerId == userId)
@@ -91,24 +96,26 @@ function App() {
 
   }, [])
 
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+            setUtente(user)
+            if(user){
+                getUtente(user.uid)
+                // console.log(utente);
+            }
+    })
+
+}, [auth])
+
 
   return (
     <>
+      <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
-      {/* <!-- Contenitore Crea scommessa  --> */}
-      <AccordionBet utente={utente} bets={bets} setBet={setBet} message={message} setMessage={setMessage}/>
-      {/* <!-- Contenitore Scommesse --> */}
+      {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
+      <AccordionBet utente={utente} bets={bets} setBet={setBet} />
+      {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted}/>
-      <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} />
-      
-    {/* <div>
-      <h2 className='text-center'>CLASSIFICA</h2>
-        {bets && bets.toSorted((a, b)=>b.averageVote-a.averageVote).slice(0, 10).map((bet)=>{
-          return(
-            <div className='bg-secondary text-center border' key={bet.id}>{bet.averageVote} - {bet.name}</div>
-          )
-        }) }
-    </div> */}
     </>
   )
 }
