@@ -63,6 +63,57 @@ body {
   box-shadow: 1px 1px 3px rgb(110, 110, 99);
 }
 
+.canvas-body-menu{
+  background: linear-gradient(white, rgb(216, 216, 0));
+}
+
+.login-register-box{
+  background-color: whitesmoke;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.btn-reg-login{
+  width: 100%;
+  background-color: rgb(216, 216, 0);
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  padding: 3px 0;
+}
+
+.btn-reg-login:hover{
+  opacity: .8;
+}
+
+.log-reg-link{
+  font-weight: bold;
+  text-decoration: underline;
+  color: purple;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.log-reg-link:hover{
+  opacity: .8;
+}
+
+.btn-logout{
+  background-color: rgb(180, 15, 15);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  padding: 5px 20px;
+}
+.btn-logout:hover{
+  opacity: .8;
+}
 
 .bet-box {
   border: 1px solid var(--yellow);

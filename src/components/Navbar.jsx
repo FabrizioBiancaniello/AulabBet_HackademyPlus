@@ -2,16 +2,15 @@ import { useState, useEffect } from "react"
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function Navbar({auth, db, setUtente, utente,}){
+export default function Navbar({auth, db, setUtente, utente, calcAverageVote, getUtente}){
 
     const [registerComponent, setRegisterComponent] = useState(false)
 
-    async function getUtente(user){
-        const docRef = doc(db, "users", user);
-        const docSnap = await getDoc(docRef);
-        setUtente(docSnap.data())
-        // console.log(docSnap.data());  
-    }
+    // async function getUtente(user){
+    //     const docRef = doc(db, "users", user);
+    //     const docSnap = await getDoc(docRef);
+    //     setUtente(docSnap.data())
+    // }
 
     async function createUserFirestore(userUid, nome){
         await setDoc(doc(db, "users", userUid), {
@@ -26,71 +25,102 @@ export default function Navbar({auth, db, setUtente, utente,}){
     }
 
 
-    useEffect(()=>{
-        auth.onAuthStateChanged((user)=>{
-                setUtente(user)
-                if(user){
-                    getUtente(user.uid)
-                    // console.log(utente);
-                }
-        })
+    // useEffect(()=>{
+    //     auth.onAuthStateChanged((user)=>{
+    //             setUtente(user)
+    //             if(user){
+    //                 getUtente(user.uid)
+    //                 // console.log(utente);
+    //             }
+    //     })
 
-    }, [auth])
+    // }, [auth])
 
     return(
         <nav className="navbar fixed-top">
             <div className="container-fluid d-flex justify-content-end">
                 <button className="btn-nav mt-3 me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <i class={`bi bi-person-fill fs-3 ${utente ? "text-success" : "text-danger"}`}></i>
+                    <i className={`bi bi-person-fill fs-3 ${utente ? "text-success" : "text-danger"}`}></i>
                 </button>
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div className="d-flex justify-content-between p-3">
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    <h5 className="offcanvas-title" id="offcanvasNavbarLabel">{utente ? utente.name : "Utente"}</h5>
+                    <h5 className="offcanvas-title" id="offcanvasNavbarLabel">AulaBet</h5>
                 </div>
-                <div className="offcanvas-body">
+                <div className="offcanvas-body canvas-body-menu">
                     {!utente ? 
                     <div>
-                    <p><span onClick={()=>setRegisterComponent(false)}>Login</span>  / <span onClick={()=>setRegisterComponent(true)}>Register</span></p>
 
                     {registerComponent ? 
                     // REGISTER
-                    <form className="p-5">
-                        <div className="mb-3">
-                        <label htmlFor="inputUsername" className="form-label">Username</label>
-                        <input required type="text" className="form-control" id="inputUsername" aria-describedby="emailHelp"/>
-                        </div>
-                        <div className="mb-3">
-                        <label htmlFor="inputEmail" className="form-label">Email address</label>
-                        <input required type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp"/>
-                        </div>
-                        <div className="mb-3">
-                        <label htmlFor="inputPassword" className="form-label">Password</label>
-                        <input required type="password" className="form-control" id="inputPassword"/>
-                        </div>
-                        <div className="d-flex justify-content-center">
-                            <button onClick={(event)=> {event.preventDefault(); createUserWithEmailAndPassword(auth, inputEmail.value, inputPassword.value).then((userCredential)=>{const user = userCredential.user; createUserFirestore(userCredential.user.uid, inputUsername.value)})}} type="submit" className="btn-nav px-5 mt-3">Registrati</button>
-                        </div>
-                    </form>
+                    <div className="mt-5">
+                        <h2 className="display-5">REGISTRATI</h2>
+                        <p className="mb-5">Sei già registrato? Effettua il <span className="log-reg-link" onClick={()=>setRegisterComponent(false)}>Login</span>.</p>
+                        <form className="login-register-box">
+                            <div className="mb-3">
+                            <label htmlFor="inputUsername" className="form-label">Username</label>
+                            <input required type="text" className="form-control" id="inputUsername" aria-describedby="emailHelp"/>
+                            </div>
+                            <div className="mb-3">
+                            <label htmlFor="inputEmail" className="form-label">Indirizzo Email</label>
+                            <input required type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp"/>
+                            </div>
+                            <div className="mb-3">
+                            <label htmlFor="inputPassword" className="form-label">Password</label>
+                            <input required type="password" className="form-control" id="inputPassword"/>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <button onClick={(event)=> {event.preventDefault(); createUserWithEmailAndPassword(auth, inputEmail.value, inputPassword.value).then((userCredential)=>{const user = userCredential.user; createUserFirestore(userCredential.user.uid, inputUsername.value)})}} type="submit" className="btn-reg-login mt-4">Registrati</button>
+                            </div>
+                        </form>
+                    </div>
                     :
                     // LOGIN
-                    <div>
-                        <div className="mx-4 mt-2 mb-5">
-                            <input type="email" placeholder="Email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
-                        </div>
-                        <div className="mx-4 my-5">
-                            <input type="password" placeholder="Password" className="form-control" id="loginPassword"/>
-                        </div>
-                        <div className="mx-4 my-5 d-flex justify-content-center">
-                        <button onClick={()=> {signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential)=>{const user = userCredential.user})}} type="submit" className="">LogIn</button>
+                    <div className="mt-5">
+                        <h2 className="display-5">LOGIN</h2>
+                        <p className="mb-5">Non sei registrato? Iscriviti tramite il link <span className="log-reg-link" onClick={()=>setRegisterComponent(true)}>Registrati</span>.</p>
+                        <div className="login-register-box">
+                            <div className="mt-5 mb-3">
+                                <label htmlFor="loginEmail" className="form-label">Indirizzo Email</label>
+                                <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
+                            </div>
+                            <div className=" mb-3">
+                                <label htmlFor="loginPassword" className="form-label">Password</label>
+                                <input type="password" className="form-control" id="loginPassword"/>
+                            </div>
+                            <div className="my-5 d-flex justify-content-center">
+                            <button onClick={()=> {signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential)=>{const user = userCredential.user})}} type="submit" className="btn-reg-login">LogIn</button>
+                            </div>
                         </div>
                     </div>
                     }
                     </div>
                     :
-                    /* LOGOUT  */
-                    <div className="d-flex justify-content-center">
-                        <button onClick={()=>{signOut(auth)}} className="">LogOut</button>
+                    /* PROFILO  */
+                    <div>
+                        <h2 className="display-5 text-center border-bottom mt-5">PROFILO</h2>
+                        <div className="login-register-box text-center mt-5">
+                            <div className="my-3">
+                                <h5>Nome Utente</h5>
+                                <p className="border-bottom">{utente.name}</p>
+                            </div>
+                            <div className="mb-3">
+                                <h5>Bet Inserite</h5>
+                                <p className="border-bottom">{utente.bets && utente.bets.length}</p>
+                            </div>
+                            <div className="mb-3">
+                                <h5>Bet Votate</h5>
+                                <p className="border-bottom">{utente.voted && utente.voted.length}</p>
+                            </div>
+                            <div className="mb-3">
+                                <h5>Media Voti</h5>
+                                <p className="border-bottom">{utente.voted && calcAverageVote(utente.voted)}</p>
+                            </div>
+                            <div className="d-flex justify-content-center mt-5">
+                                <button onClick={()=>{signOut(auth)}} className="btn-logout">LogOut</button>
+                            </div>
+                        </div>
+
                     </div>
                     }
                 </div>

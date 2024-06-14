@@ -16,7 +16,8 @@ export default function ContainerBets({ bets, updateVote, utente, notVoted }) {
                                     <p className="fw-bold">Descrizione Scommessa:</p>
                                     <p className="p-description">{bet.description}</p>
                                     <p className='text-center fw-bold'>VOTA</p>
-                                    {utente && notVoted(bet.vote, utente.id) &&
+                                    {/* && !utente.bets.includes(bet.id) */}
+                                    {utente && !utente.bets?.includes(bet.id) &&  notVoted(bet.vote, utente.id) &&
                                         <div className='d-flex justify-content-between'>
                                             <div className='vote-box' onClick={() => updateVote(bet.id, utente.id, 1)}>1</div>
                                             <div className='vote-box' onClick={() => updateVote(bet.id, utente.id, 2)}>2</div>

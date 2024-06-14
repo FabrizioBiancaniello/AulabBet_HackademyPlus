@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-export default function AccordionBet({ setBet, bets, message, setMessage, utente }) {
+export default function AccordionBet({ setBet, bets, utente }) {
     const [betPlayerName, setBetPlayerName] = useState("");
     const [betDescription, setBetDescription] = useState("");
+    const [message, setMessage] = useState("");
 
     return (
         <>
@@ -29,39 +30,10 @@ export default function AccordionBet({ setBet, bets, message, setMessage, utente
                                 </div>
                                 :
                                 <div className='d-flex justify-content-center align-items-center h-100'>
-                                    <p>EFFETTUA IL LOGIN O REGISTRATI PER PIAZZARE LA TUA BET</p>
+                                    <p className='text-center'>EFFETTUA IL LOGIN O REGISTRATI PER INSERIRE LA TUA BET</p>
                                 </div>
                             }
                         </div>
-
-                        {/*<div className="accordion accordion-flush accordion-box bg-t" id="accordionFlushExample">
-                            <div className="accordion-item bg-t ">
-                                <h2 className="accordion-header ">
-                                    <button className="accordion-button collapsed accordion-button rounded-top-3" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        NUOVA BET
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
-                                    <div className="accordion-body p-0">
-                                        <div className="bet-create">
-
-                                            {message &&
-                                                <div className={`alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
-                                                    {message.body}
-                                                </div>
-                                            }
-                                            <div className="d-flex flex-column">
-                                                <label className="fs-5 mt-3 fw-bold text-cus" htmlFor="description">Descrizione Scommessa:</label>
-                                                <textarea className='p-2' onChange={(event) => setBetDescription(event.target.value)} value={betDescription} id="description"></textarea>
-                                            </div>
-                                            <div className="d-flex justify-content-center">
-                                                <button className="btn-custom mt-4 fs-5" onClick={setBet}>AGGIUNGI</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                     {/* RIGHT COL  */}
                     <div className="col-12 col-md-7 px-3 rankingContainer rounded-3 shadow-lg">
