@@ -39,14 +39,14 @@ export default function Navbar({auth, db, setUtente, utente,}){
 
     return(
         <nav className="navbar fixed-top">
-            <div className="container-fluid">
-                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+            <div className="container-fluid d-flex justify-content-end">
+                <button className="btn-nav mt-3 me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <i class={`bi bi-person-fill fs-3 ${utente ? "text-success" : "text-danger"}`}></i>
                 </button>
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasNavbarLabel">{utente ? utente.name : "Utente"}</h5>
+                <div className="d-flex justify-content-between p-3">
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 className="offcanvas-title" id="offcanvasNavbarLabel">{utente ? utente.name : "Utente"}</h5>
                 </div>
                 <div className="offcanvas-body">
                     {!utente ? 
@@ -82,7 +82,7 @@ export default function Navbar({auth, db, setUtente, utente,}){
                             <input type="password" placeholder="Password" className="form-control" id="loginPassword"/>
                         </div>
                         <div className="mx-4 my-5 d-flex justify-content-center">
-                        <button onClick={()=> {signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential)=>{const user = userCredential.user})}} type="submit" className="btn-login">LogIn</button>
+                        <button onClick={()=> {signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential)=>{const user = userCredential.user})}} type="submit" className="">LogIn</button>
                         </div>
                     </div>
                     }
@@ -90,7 +90,7 @@ export default function Navbar({auth, db, setUtente, utente,}){
                     :
                     /* LOGOUT  */
                     <div className="d-flex justify-content-center">
-                        <button onClick={()=>{signOut(auth)}} className="btn-nav">LogOut</button>
+                        <button onClick={()=>{signOut(auth)}} className="">LogOut</button>
                     </div>
                     }
                 </div>
