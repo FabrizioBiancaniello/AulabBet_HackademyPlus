@@ -2,6 +2,7 @@ body {
   background: #141414ea;
   filter: contrast(100%) brightness(100%);
   overflow-x: hidden;
+  min-height: 100vh;
 }
 .grain {
   position: fixed;
