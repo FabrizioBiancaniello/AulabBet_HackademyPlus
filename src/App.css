@@ -45,6 +45,7 @@ body {
     to { transform: translate3d(-7rem,0,0) }
   }
 }
+
 :root {
   --yellow: #ecec23;
 }
@@ -199,6 +200,18 @@ body {
   padding: 20px;
   background-color: #1d1d1b;
   position: relative;
+}
+.alert-box{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+}
+.reg-login-box-alert{
+  position: absolute;
+  top: 105%;
+  left: 5%;
+  width: 90%;
 }
 
 .p-description {

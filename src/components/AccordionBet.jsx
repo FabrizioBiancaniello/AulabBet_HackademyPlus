@@ -11,12 +11,12 @@ export default function AccordionBet({ setBet, bets, utente }) {
                 <div className="row justify-content-around">
                     {/* LEFT COL  */}
                     <div className="col-12 col-md-4">
-                        <div className='createBetContainer text-cus'>
+                        <div className='createBetContainer text-cus position-relative'>
                             <h2 className='text-center'>NUOVA BET</h2>
                             {utente ?
                                 <div className='h-100 d-flex flex-column justify-content-evenly'>
                                     {message &&
-                                        <div className={`alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
+                                        <div className={`alert-box alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
                                             {message.body}
                                         </div>
                                     }

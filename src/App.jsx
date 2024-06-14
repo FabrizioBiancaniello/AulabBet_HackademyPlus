@@ -61,18 +61,19 @@ function App() {
       });
       const betRef = doc(db, "users", utente.id);
       await updateDoc(betRef, {bets: arrayUnion(docRef.id)})
+      getUtente(utente.id)
       //Reset Campi
       setDescription("");
 
       setMessage({type: "correct", body: "Scommessa Inserita correttamente"})
       setTimeout(()=>{
         setMessage("")
-      }, 10000)
+      }, 5000)
       } else {
         setMessage({type: "error", body: "La descrizione è troppo corta"})
         setTimeout(()=>{
           setMessage("")
-        }, 10000)
+        }, 5000)
       }
   }
   async function updateVote(betId, userId, value){
@@ -81,6 +82,7 @@ function App() {
     const userRef = doc(db, "users", userId);
     await updateDoc(userRef, {voted: arrayUnion({"betId": betId, "vote": value})})
   } 
+
   function notVoted(array, userId){
     let filtered = array.filter((obj)=> obj.playerId == userId)
     return (filtered.length > 0) ? false : true
@@ -89,7 +91,6 @@ function App() {
   function calcAverageVote(array){
     return +(array.reduce((acc, el)=> acc+el.vote, 0)/array.length).toFixed(1) || 0
   }
-
 
   useEffect(()=>{
     getBet();
