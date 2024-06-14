@@ -76,11 +76,13 @@ function App() {
         }, 5000)
       }
   }
+  
   async function updateVote(betId, userId, value){
     const betRef = doc(db, "bets", betId);
     await updateDoc(betRef, {vote: arrayUnion({playerId: userId, vote: value})})
     const userRef = doc(db, "users", userId);
     await updateDoc(userRef, {voted: arrayUnion({"betId": betId, "vote": value})})
+    getUtente(utente.id)
   } 
 
   function notVoted(array, userId){
