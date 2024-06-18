@@ -200,6 +200,7 @@ body {
   top: 5%;
   left: 5%;
   width: 90%;
+  text-shadow: none;
 }
 .reg-login-box-alert{
   position: absolute;

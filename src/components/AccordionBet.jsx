@@ -16,7 +16,7 @@ export default function AccordionBet({ setBet, bets, utente }) {
                             {utente ?
                                 <div className='h-100 d-flex flex-column justify-content-evenly'>
                                     {message &&
-                                        <div className={`alert-box alert fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
+                                        <div className={`alert-box alert text-center fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
                                             {message.body}
                                         </div>
                                     }
