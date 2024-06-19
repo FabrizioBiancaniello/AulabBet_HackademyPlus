@@ -6,7 +6,6 @@ export default function AccordionBet({ setBet, bets, utente }) {
     const [message, setMessage] = useState("");
 
     return (
-        <>
             <div className="container-fluid">
                 <div className="row justify-content-around">
                     {/* LEFT COL  */}
@@ -101,9 +100,6 @@ export default function AccordionBet({ setBet, bets, utente }) {
                     </div>
                 </div>
             </div>
-
-
-        </>
 
     )
 }
