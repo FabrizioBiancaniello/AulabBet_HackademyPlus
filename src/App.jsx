@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, addDoc, getDoc, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
+import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
@@ -8,6 +8,7 @@ import AccordionBet from './components/AccordionBet';
 import './App.css'
 import ContainerBets from './components/ContainerBets';
 import Hero from './components/Hero'
+import MyBetsContainer from './components/MyBetsContainer.jsx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-UcNEr94I0KE5BqhuXQrGw03VU35cUuk",
@@ -26,13 +27,14 @@ const auth = getAuth(app)
 
 function App() {
   const [utente, setUtente] = useState(null);
-  const [bets, setBets] = useState("");
+  const [bets, setBets] = useState(null);
+  const [myBets, setMyBets] = useState(null);
 
-    async function getUtente(user){
-        const docRef = doc(db, "users", user);
-        const docSnap = await getDoc(docRef);
-        setUtente(docSnap.data())
-    }
+  async function getUtente(user){
+    const docRef = doc(db, "users", user);
+    const docSnap = await getDoc(docRef);
+    setUtente(docSnap.data())
+  }
 
   async function getBet() {
     const colRef = collection(db, "bets");
@@ -47,7 +49,25 @@ function App() {
             items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
         });
         setBets(items.reverse())
+        
     });
+  }
+
+  async function getMyBets(userId){
+    const colRef = collection(db, "bets");
+    const q = query(colRef, where("playerId", "==", userId))
+    onSnapshot(q, (querySnapshot)=>{
+      const items = [];
+      querySnapshot.forEach(doc => {
+          let data = doc.data().created
+          let dataLocale = data.toDate()
+          const options = { year: 'numeric', month: 'numeric', day: 'numeric'};
+          const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
+          items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
+      });
+      setMyBets(items.reverse())
+    });
+
   }
 
   async function setBet(description, setDescription, setMessage, utente){
@@ -96,16 +116,21 @@ function App() {
 
   useEffect(()=>{
     getBet();
-
+    if(auth.currentUser){
+    }
+    
   }, [])
-
+  
   useEffect(()=>{
     auth.onAuthStateChanged((user)=>{
-            setUtente(user)
-            if(user){
-                getUtente(user.uid)
+      setUtente(user)
+      if(user){
+        getUtente(user.uid)
+        getMyBets(user.uid)
                 // console.log(utente);
-            }
+      } else {
+        setMyBets(null)
+      }
     })
 
 }, [auth])
@@ -117,6 +142,7 @@ function App() {
       <Hero />
       {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
       <AccordionBet utente={utente} bets={bets} setBet={setBet} />
+      {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted}/>
     </>
