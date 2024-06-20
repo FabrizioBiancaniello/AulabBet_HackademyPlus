@@ -11,8 +11,11 @@ export default function AccordionBet({ setBet, bets, utente }) {
                     {/* LEFT COL  */}
                     <div className="col-12 col-md-4">
                         <div className='createBetContainer text-cus position-relative'>
-                            <h2 className='text-center'>NUOVA BET</h2>
-                            {utente ?
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <h2 className='text-center'>NUOVA BET</h2>
+                                <h2>{utente?.bets?.length ?? 0}/3</h2>
+                            </div>
+                            {utente ? (utente.bets?.length < 3 ? (
                                 <div className='h-100 d-flex flex-column justify-content-evenly'>
                                     {message &&
                                         <div className={`alert-box alert text-center fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
@@ -27,11 +30,15 @@ export default function AccordionBet({ setBet, bets, utente }) {
                                         <button className="btn-custom fs-5" onClick={() => setBet(betDescription, setBetDescription, setMessage, utente)}>AGGIUNGI</button>
                                     </div>
                                 </div>
-                                :
+                            ) : (
+                                <div className='d-flex justify-content-center align-items-center h-100'>
+                                    <p className='text-center'>HAI RAGGIUNTO IL LIMITE DI BET CONSENTITO, 3.</p>
+                                </div>   
+                            )) : (
                                 <div className='d-flex justify-content-center align-items-center h-100'>
                                     <p className='text-center'>EFFETTUA IL LOGIN O REGISTRATI PER INSERIRE LA TUA BET</p>
                                 </div>
-                            }
+                            )}
                         </div>
                     </div>
                     {/* RIGHT COL  */}

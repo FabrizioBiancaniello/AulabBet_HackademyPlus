@@ -191,6 +191,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  font-size: x-large;
+  font-weight: 400;
 }
 .totVotiBox{
   display: flex;
@@ -199,7 +201,12 @@ body {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: var(--yellow);
+  background-color: rgb(236, 236, 35, .7);
+  /* box-shadow: 1px 1px 5px black; */
+  border: 2px solid var(--yellow);
+  font-size: x-large;
+  font-weight: 400;
+  text-shadow: 1px 1px 3px black;
 }
 
 .classifica-titles{
