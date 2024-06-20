@@ -27,8 +27,8 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                     <p className="p-description">{bet.description}</p>
                 </div>
                 <div className="container-fluid">
-                    <div className="row justify-content-between">
-                        <div className="col-5 col-lg-4">
+                    <div className="row justify-content-around pt-2">
+                        <div className="col-5 col-lg-4 d-flex flex-column align-items-center justify-content-center">
                             <ReactVisibilitySensor>
                                 {({ isVisible }) => {
                                     if (visible == false && isVisible) {
@@ -36,15 +36,16 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                                         visible = true;
                                     }
                                     return (
-                                        <div className="circularBox">
-                                            <CircularProgressbar value={value} maxValue={5}
+                                        <div className="circularBox w-75">
+                                            <CircularProgressbar className="w-100 h-100" value={value} maxValue={5}
                                                 styles={buildStyles({
                                                     // rotation: 1,
                                                     strokeLinecap: 'round',
+                                                    
                                                     transition: 'stroke-dashoffset 0.5s ease 0s',
                                                     pathTransitionDuration: 0.5,
                                                     // Colors
-                                                    pathColor: `rgb(236, 236, 35)`,
+                                                    pathColor: `rgb(150, 0, 108)`,
                                                     trailColor: 'rgb(236, 236, 35, 0.1)',
                                                     backgroundColor: '#3e98c7',
                                                 })}
@@ -54,11 +55,11 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                                     );
                                 }}
                             </ReactVisibilitySensor>
-                            <p className="fs-5 text-center mt-2">Media Voto</p>
+                            <p className="text-center mt-2">Media Voto</p>
                         </div>
-                        <div className="col-5 col-lg-4">
-                            <div className="totVotiBox">{bet.vote.length}</div>
-                            <p className="fs-5 text-center mt-2">Totale Voti</p>
+                        <div className="col-5 col-lg-4 d-flex flex-column align-items-center justify-content-end">
+                            <div className="totVotiBox w-75">{bet.vote.length}</div>
+                            <p className="text-center mt-2">Totale Voti</p>
                         </div>
                     </div>
                 </div>
