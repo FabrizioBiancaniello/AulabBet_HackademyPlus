@@ -22,10 +22,7 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                     </div>
                     <p className="mb-0">{bet.created}</p>
                 </div>
-                <div>
-                    <p className="fw-bold">Descrizione Scommessa:</p>
-                    <p className="p-description">{bet.description}</p>
-                </div>
+            
                 <div className="container-fluid">
                     <div className="row justify-content-around pt-2">
                         <div className="col-5 col-lg-4 d-flex flex-column align-items-center justify-content-center">
@@ -55,19 +52,20 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                                     );
                                 }}
                             </ReactVisibilitySensor>
-                            <p className="text-center mt-2">Media Voto</p>
+                            <p className="text-center mt-2">Media</p>
                         </div>
                         <div className="col-5 col-lg-4 d-flex flex-column align-items-center justify-content-end">
                             <div className="totVotiBox w-75">{bet.vote.length}</div>
-                            <p className="text-center mt-2">Totale Voti</p>
+                            <p className="text-center mt-2">Totale</p>
                         </div>
                     </div>
                 </div>
-
+                <div>
+                    <p className="fw-bold text-center secondary-title">Descrizione Scommessa:</p>
+                    <p className="p-description">{bet.description}</p>
+                </div>
                 {utente && !utente.bets?.includes(bet.id) && notVoted(bet.vote, utente.id) &&
-                    <div className=" d-flex justify-content-center">
                         <p className="voteBtn m-0" onClick={() => setVoteMenu(true)}>VOTA BET</p>
-                    </div>
                 }
                 <div style={{ "height": `${voteMenu ? '100%' : "0%"}`, "opacity": `${voteMenu ? '1' : "0"}` }} className='containerVotes'>
                     <div className="d-flex flex-column justify-content-center p-2 position-relative h-100">

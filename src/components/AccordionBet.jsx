@@ -12,8 +12,8 @@ export default function AccordionBet({ setBet, bets, utente }) {
                     <div className="col-12 col-md-4">
                         <div className='createBetContainer text-cus position-relative'>
                             <div className='d-flex justify-content-between align-items-center'>
-                                <h2 className='text-center'>NUOVA BET</h2>
-                                <h2>{utente?.bets?.length ?? 0}/3</h2>
+                                <h2 className='text-center'>INSERISCI BET</h2>
+                                <h2>{utente?.bets?.length ?? 0}/<span className='secondary-title'>3</span></h2>
                             </div>
                             {utente ? (utente.bets?.length < 3 ? (
                                 <div className='h-100 d-flex flex-column justify-content-evenly'>
@@ -96,13 +96,13 @@ export default function AccordionBet({ setBet, bets, utente }) {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             )
                                         })}
-
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

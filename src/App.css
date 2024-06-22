@@ -59,7 +59,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1c1;
 }
 
 /* Handle */
@@ -171,7 +171,7 @@ body {
   padding: 20px;
   background-color: #1d1d1b;
   color: white;
-  /* box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.5); */
+  box-shadow: -5px 5px 10px rgb(0, 0, 0);
 }
 
 @keyframes rotate{
@@ -269,13 +269,18 @@ body {
 }
 
 .voteBtn{
+  position: absolute;
+  bottom: -2%;
+  right: 10%;
   background-color: var(--yellow);
   font-weight: bold;
   text-decoration: none;
   color: black;
-  padding: 7px 14px;
+  padding: 4px 20px;
   border-radius: 5px;
+  box-shadow: -2px 2px 10px rgb(0, 0, 0);
   cursor: pointer;
+  z-index: 5;
 }
 .voteBtn:hover{
   background-color: #ecec23b2;
@@ -364,6 +369,17 @@ textarea:focus {
   height: 500px;
   overflow-y: auto;
 }
+/* .scrollable{
+    width: 100%;
+  height: 100%;
+  overflow: auto; 
+  padding-right: 17px; 
+  box-sizing: content-box;
+  position: absolute; 
+  top: 0;
+  left: 0;
+} */
+
 
 .rankingPlayer {
   font-size: 1rem;
