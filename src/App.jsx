@@ -9,6 +9,7 @@ import './App.css'
 import ContainerBets from './components/ContainerBets';
 import Hero from './components/Hero'
 import MyBetsContainer from './components/MyBetsContainer.jsx';
+import Chart from './components/Chart.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-UcNEr94I0KE5BqhuXQrGw03VU35cUuk",
@@ -29,6 +30,7 @@ function App() {
   const [utente, setUtente] = useState(null);
   const [bets, setBets] = useState(null);
   const [myBets, setMyBets] = useState(null);
+  const [users, setUsers] = useState([]);
 
   async function getUtente(user){
     const docRef = doc(db, "users", user);
@@ -48,7 +50,21 @@ function App() {
             const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
             items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
         });
+        console.log(items)
         setBets(items.reverse())
+        
+    });
+  }
+
+  async function getUsers() {
+    const colRef = collection(db, "users");
+    const q = query(colRef, orderBy("name"))
+    onSnapshot(q, (querySnapshot)=>{
+        const items = [];
+        querySnapshot.forEach(doc => {
+            items.push({name : doc.data().name, value: doc.data().voted[0].vote, bulletSettings: { src: "https://picsum.photos/301" }});
+        });
+        setUsers(items.reverse())
         
     });
   }
@@ -116,9 +132,7 @@ function App() {
 
   useEffect(()=>{
     getBet();
-    if(auth.currentUser){
-    }
-    
+    getUsers();    
   }, [])
   
   useEffect(()=>{
@@ -142,6 +156,7 @@ function App() {
       <Hero />
       {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
       <AccordionBet utente={utente} bets={bets} setBet={setBet} />
+      <Chart users = {users} />
       {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted}/>
