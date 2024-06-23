@@ -369,16 +369,6 @@ textarea:focus {
   height: 500px;
   overflow-y: auto;
 }
-/* .scrollable{
-    width: 100%;
-  height: 100%;
-  overflow: auto; 
-  padding-right: 17px; 
-  box-sizing: content-box;
-  position: absolute; 
-  top: 0;
-  left: 0;
-} */
 
 
 .rankingPlayer {
@@ -414,7 +404,53 @@ textarea:focus {
   cursor: pointer;
 }
 
-
 h6 {
   margin: 0;
+}
+
+
+/* CHART  */
+.chartDiv{
+  height: 500px;
+}
+
+.chartScroll{
+  overflow-x: auto;
+}
+
+.chartScroll::-webkit-scrollbar{
+  height: 10px;
+}
+.chartScroll::-webkit-scrollbar-track{
+  border-radius: 3px;
+}
+.chartScroll::-webkit-scrollbar-thumb{
+  border: 1px solid rgb(255, 234, 0);
+}
+
+.chartContainer{
+  margin: 5vh 20px;
+  background-color: rgb(94, 94, 94);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid var(--yellow);
+  box-shadow: -2px 2px 10px black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* MOBILE  */
+@media screen  and (max-width: 400px) {
+  .chartDiv{
+    height: 300px;
+  }
 }

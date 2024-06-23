@@ -50,10 +50,9 @@ function App() {
             const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
             items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
         });
-        console.log(items)
         setBets(items.reverse())
         
-    });
+      });
   }
 
   async function getUsers() {
@@ -62,8 +61,11 @@ function App() {
     onSnapshot(q, (querySnapshot)=>{
         const items = [];
         querySnapshot.forEach(doc => {
-            items.push({name : doc.data().name, value: doc.data().voted[0].vote, bulletSettings: { src: "https://picsum.photos/301" }});
+          if(doc.data().voted.length > 0){
+            items.push({name : doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0 ), bulletSettings: { src: "https://picsum.photos/301" }});
+          }
         });
+        console.log(items)
         setUsers(items.reverse())
         
     });

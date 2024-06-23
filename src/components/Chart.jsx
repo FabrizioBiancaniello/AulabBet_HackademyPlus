@@ -2,23 +2,12 @@
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
+import useWindowWidth from "../utils/useWindowWidth";
 
 export default function Chart({users}) {
-
-     const [data, setData] = useState([])
-
-    let array = [
-        { name: 'Carlo Boffetti', value: 4.2, bulletSettings: { src: "https://picsum.photos/300" } },
-        { name: 'Babrizio Fiancaniello', value: 2.2, bulletSettings: { src: "https://picsum.photos/302" } },
-        { name: 'Mioele Gedde', value: 5, bulletSettings: { src: "https://picsum.photos/301" } }
-    ]
-
-
-    // useEffect( ()=>{
-       
-    // }, [])
-
+    const chartRef = useRef(null);
+    const currentWidth = useWindowWidth();
 
     useLayoutEffect(() => {
         let root = am5.Root.new("chartdiv");
@@ -55,16 +44,32 @@ export default function Chart({users}) {
 
         xRenderer.grid.template.set("visible", false);
 
+        // Modify the appearance of the labels on the xAxis
+        xRenderer.labels.template.setAll({
+            fontSize: (currentWidth*0.007)+10,
+            fontFamily: 'Arial, sans-serif',
+            fontWeight: "700",
+            oversizedBehavior: "truncate",
+            maxWidth: currentWidth*0.25 < 250 ? currentWidth*0.25 : 250,
+        });
+
         let yRenderer = am5xy.AxisRendererY.new(root, {});
         let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
             maxDeviation: 0,
             min: 0,
+            max:5,
             extraMax: 0.1,
             renderer: yRenderer
         }));
 
         yRenderer.grid.template.setAll({
             strokeDasharray: [2, 2]
+        });
+
+        yRenderer.labels.template.setAll({
+            fontSize: 20,
+            fontFamily: 'Arial, sans-serif',
+            fontWeight: "700",
         });
 
         // Create series
@@ -75,7 +80,8 @@ export default function Chart({users}) {
             valueYField: "value",
             sequencedInterpolation: true,
             categoryXField: "name",
-            tooltip: am5.Tooltip.new(root, { dy: -25, labelText: "{valueY}" })
+            tooltip: am5.Tooltip.new(root, { dy: -25, labelText: "{valueY}" }),
+            minWidth: 200,
         }));
 
 
@@ -93,33 +99,6 @@ export default function Chart({users}) {
             return chart.get("colors").getIndex(series.columns.indexOf(target));
         });
 
-        // Set data
-        let data = [...users];
-        // setData();
-        console.log(data);
-        // let data = [
-        //     {
-        //         name: "John",
-        //         value: 35654,
-        //         bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/A04.png" }
-        //       },
-        //       {
-        //         name: "Damon",
-        //         value: 65456,
-        //         bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/C02.png" }
-        //       },
-        //       {
-        //         name: "Patrick",
-        //         value: 45724,
-        //         bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/D02.png" }
-        //       },
-        //       {
-        //         name: "Mark",
-        //         value: 13654,
-        //         bulletSettings: { src: "https://www.amcharts.com/lib/images/faces/E01.png" }
-        //       }
-        // ];
-
 
         series.bullets.push(function () {
             return am5.Bullet.new(root, {
@@ -134,29 +113,58 @@ export default function Chart({users}) {
                     shadowBlur: 4,
                     shadowOffsetX: 4,
                     shadowOffsetY: 4,
-                    shadowOpacity: 0.6
+                    shadowOpacity: 0.6,
+                    mask: am5.Circle.new(root, {
+                        radius: 25 
+                    })
                 })
             });
         });
 
-        xAxis.data.setAll(data);
-        series.data.setAll(data);
+        // Store chart instance in ref
+        chartRef.current = { root, chart, xAxis, series };
+
+
 
         // Make stuff animate on load
         // https://www.amcharts.com/docs/v5/concepts/animations/
         series.appear(1000);
         chart.appear(1000, 100);
 
-    }, [])
+        return () => {
+            root.dispose();
+        };
 
-    //  {bets && bets.bets.map(bet=> data.push(bet))}
+    }, [currentWidth])
+
+
+    useEffect(() => {
+        if (chartRef.current) {
+            const { xAxis, series } = chartRef.current;
+            xAxis.data.setAll(users);
+            series.data.setAll(users);
+        }
+    }, [users, currentWidth]);
 
 
 
     return (
-        <div className="d-flex justify-content-center align-items-center">
-
-            <div id="chartdiv" style={{ width: '500px', height: '500px' }}></div>
+        <div className="container py-5">
+            <div className="row">
+                <div className="col-12">
+                    <h2 className="display-2 text-center mt-5 mb-3 border-bottom secondary-title">STATISTICHE</h2>
+                </div>
+                <div className="col-12">
+                    <h3 className="secondary-title fs-2 text-center">MEDIA VOTO DI TUTTI GLI UTENTI</h3>
+                </div>
+            </div>
+        <div className="row justify-content-center">
+                <div className="chartContainer col-12">
+                    <div className="p-1 chartScroll">
+                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length*(currentWidth*0.25)}px`, maxWidth: `${users?.length*250}px`}}></div>
+                    </div> 
+                </div>
         </div>
+    </div>
     )
 }
