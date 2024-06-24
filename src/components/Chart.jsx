@@ -147,7 +147,7 @@ export default function Chart({users}) {
     }, [users, currentWidth]);
 
 
-
+    
     return (
         <div className="container py-5">
             <div className="row">
@@ -155,13 +155,13 @@ export default function Chart({users}) {
                     <h2 className="display-2 text-center mt-5 mb-3 border-bottom secondary-title">STATISTICHE</h2>
                 </div>
                 <div className="col-12">
-                    <h3 className="secondary-title fs-2 text-center">MEDIA VOTO DI TUTTI GLI UTENTI</h3>
+                    <h3 className="secondary-title fs-4 text-center">Media voti di tutti gli utenti</h3>
                 </div>
             </div>
         <div className="row justify-content-center">
                 <div className="chartContainer col-12">
                     <div className="p-1 chartScroll">
-                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length*(currentWidth*0.25)}px`, maxWidth: `${users?.length*250}px`}}></div>
+                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length*(currentWidth*0.15)}px`, maxWidth: `${users?.length*250}px`}}></div>
                     </div> 
                 </div>
         </div>

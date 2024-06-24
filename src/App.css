@@ -1,6 +1,7 @@
 body {
   background: #141414ea;
-
+  /* font-family: "Inter", sans-serif; */
+  font-family: "Poppins", sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -372,7 +373,7 @@ textarea:focus {
 
 
 .rankingPlayer {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .bg-bet {

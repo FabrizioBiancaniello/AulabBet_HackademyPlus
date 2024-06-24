@@ -158,7 +158,7 @@ function App() {
       <Hero />
       {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
       <AccordionBet utente={utente} bets={bets} setBet={setBet} />
-      <Chart users = {users} />
+      {window.innerWidth >= 600 && <Chart users = {users} /> }
       {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted}/>
