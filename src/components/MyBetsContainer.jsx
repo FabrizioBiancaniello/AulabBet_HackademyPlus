@@ -1,13 +1,15 @@
-import Card from "./Card"
+import MyBetsCard from "./MyBetsCard"
 
 export default function MyBetsContainer({myBets, utente, notVoted, updateVote}){
     return(
-        <div className="container py-5">
-            <h2 className="display-2 text-center my-5 border-bottom secondary-title">LE MIE BET</h2>
-            <div className="row justify-content-center" >
+        <div className="container">
+            <h2 className="display-2 text-center secondary-title">LE MIE BET</h2>
+            <div className="row justify-content-center position-relative" >
+                <div className="container-stats"></div>
+
                 {myBets && myBets.length > 0 ? myBets.map((myBet) => {
                     return (
-                        <Card key={myBet.id} bet={myBet} updateVote={updateVote} utente={utente} notVoted={notVoted}/>
+                        <MyBetsCard key={myBet.id} bet={myBet} updateVote={updateVote} utente={utente} notVoted={notVoted}/>
                         
                     )
                     })

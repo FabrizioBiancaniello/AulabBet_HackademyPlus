@@ -5,7 +5,7 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import useWindowWidth from "../utils/useWindowWidth";
 
-export default function Chart({users}) {
+export default function Chart({ users }) {
     const chartRef = useRef(null);
     const currentWidth = useWindowWidth();
 
@@ -46,18 +46,18 @@ export default function Chart({users}) {
 
         // Modify the appearance of the labels on the xAxis
         xRenderer.labels.template.setAll({
-            fontSize: (currentWidth*0.007)+10,
+            fontSize: (currentWidth * 0.007) + 10,
             fontFamily: 'Arial, sans-serif',
             fontWeight: "700",
             oversizedBehavior: "truncate",
-            maxWidth: currentWidth*0.25 < 250 ? currentWidth*0.25 : 250,
+            maxWidth: currentWidth * 0.25 < 250 ? currentWidth * 0.25 : 250,
         });
 
         let yRenderer = am5xy.AxisRendererY.new(root, {});
         let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
             maxDeviation: 0,
             min: 0,
-            max:5,
+            max: 5,
             extraMax: 0.1,
             renderer: yRenderer
         }));
@@ -115,7 +115,7 @@ export default function Chart({users}) {
                     shadowOffsetY: 4,
                     shadowOpacity: 0.6,
                     mask: am5.Circle.new(root, {
-                        radius: 25 
+                        radius: 25
                     })
                 })
             });
@@ -147,24 +147,24 @@ export default function Chart({users}) {
     }, [users, currentWidth]);
 
 
-    
+
     return (
-        <div className="container py-5">
+        <div className="container-fluid">
             <div className="row">
                 <div className="col-12">
-                    <h2 className="display-2 text-center mt-5 mb-3 border-bottom secondary-title">STATISTICHE</h2>
+                    <h2 className="display-2 text-center secondary-title">STATISTICHE</h2>
                 </div>
                 <div className="col-12">
                     <h3 className="secondary-title fs-4 text-center">Media voti di tutti gli utenti</h3>
                 </div>
             </div>
-        <div className="row justify-content-center">
+            <div className="row justify-content-center">
                 <div className="chartContainer col-12">
                     <div className="p-1 chartScroll">
-                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length*(currentWidth*0.15)}px`, maxWidth: `${users?.length*250}px`}}></div>
-                    </div> 
+                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 250}px` }}></div>
+                    </div>
                 </div>
+            </div>
         </div>
-    </div>
     )
 }

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
+import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
@@ -32,7 +32,7 @@ function App() {
   const [myBets, setMyBets] = useState(null);
   const [users, setUsers] = useState([]);
 
-  async function getUtente(user){
+  async function getUtente(user) {
     const docRef = doc(db, "users", user);
     const docSnap = await getDoc(docRef);
     setUtente(docSnap.data())
@@ -41,115 +41,115 @@ function App() {
   async function getBet() {
     const colRef = collection(db, "bets");
     const q = query(colRef, orderBy("created"))
-    onSnapshot(q, (querySnapshot)=>{
-        const items = [];
-        querySnapshot.forEach(doc => {
-            let data = doc.data().created
-            let dataLocale = data.toDate()
-            const options = { year: 'numeric', month: 'numeric', day: 'numeric'};
-            const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
-            items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
-        });
-        setBets(items.reverse())
-        
+    onSnapshot(q, (querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach(doc => {
+        let data = doc.data().created
+        let dataLocale = data.toDate()
+        const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+        const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
+        items.push({ ...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
       });
+      setBets(items.reverse())
+
+    });
   }
 
   async function getUsers() {
     const colRef = collection(db, "users");
     const q = query(colRef, orderBy("name"))
-    onSnapshot(q, (querySnapshot)=>{
-        const items = [];
-        querySnapshot.forEach(doc => {
-          if(doc.data().voted.length > 0){
-            items.push({name : doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0 ), bulletSettings: { src: "https://picsum.photos/301" }});
-          }
-        });
-        console.log(items)
-        setUsers(items.reverse())
-        
+    onSnapshot(q, (querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach(doc => {
+        if (doc.data().voted.length > 0) {
+          items.push({ name: doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0), bulletSettings: { src: "https://picsum.photos/301" } });
+        }
+      });
+      console.log(items)
+      setUsers(items.reverse())
+
     });
   }
 
-  async function getMyBets(userId){
+  async function getMyBets(userId) {
     const colRef = collection(db, "bets");
     const q = query(colRef, where("playerId", "==", userId))
-    onSnapshot(q, (querySnapshot)=>{
+    onSnapshot(q, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach(doc => {
-          let data = doc.data().created
-          let dataLocale = data.toDate()
-          const options = { year: 'numeric', month: 'numeric', day: 'numeric'};
-          const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
-          items.push({...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
+        let data = doc.data().created
+        let dataLocale = data.toDate()
+        const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+        const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
+        items.push({ ...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
       });
       setMyBets(items.reverse())
     });
 
   }
 
-  async function setBet(description, setDescription, setMessage, utente){
-    if(description.length > 10){
+  async function setBet(description, setDescription, setMessage, utente) {
+    if (description.length > 10) {
       const docRef = await addDoc(collection(db, "bets"), {
-          playerId: utente.id,
-          name: utente.name,
-          description: description,
-          created: serverTimestamp(),
-          vote: []
+        playerId: utente.id,
+        name: utente.name,
+        description: description,
+        created: serverTimestamp(),
+        vote: []
       });
       const betRef = doc(db, "users", utente.id);
-      await updateDoc(betRef, {bets: arrayUnion(docRef.id)})
+      await updateDoc(betRef, { bets: arrayUnion(docRef.id) })
       getUtente(utente.id)
       //Reset Campi
       setDescription("");
 
-      setMessage({type: "correct", body: "Scommessa Inserita correttamente"})
-      setTimeout(()=>{
+      setMessage({ type: "correct", body: "Scommessa Inserita correttamente" })
+      setTimeout(() => {
         setMessage("")
       }, 5000)
-      } else {
-        setMessage({type: "error", body: "La descrizione è troppo corta"})
-        setTimeout(()=>{
-          setMessage("")
-        }, 5000)
-      }
+    } else {
+      setMessage({ type: "error", body: "La descrizione è troppo corta" })
+      setTimeout(() => {
+        setMessage("")
+      }, 5000)
+    }
   }
-  
-  async function updateVote(betId, userId, value){
-    const betRef = doc(db, "bets", betId);
-    await updateDoc(betRef, {vote: arrayUnion({playerId: userId, vote: value})})
-    const userRef = doc(db, "users", userId);
-    await updateDoc(userRef, {voted: arrayUnion({"betId": betId, "vote": value})})
-    getUtente(utente.id)
-  } 
 
-  function notVoted(array, userId){
-    let filtered = array.filter((obj)=> obj.playerId == userId)
+  async function updateVote(betId, userId, value) {
+    const betRef = doc(db, "bets", betId);
+    await updateDoc(betRef, { vote: arrayUnion({ playerId: userId, vote: value }) })
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { voted: arrayUnion({ "betId": betId, "vote": value }) })
+    getUtente(utente.id)
+  }
+
+  function notVoted(array, userId) {
+    let filtered = array.filter((obj) => obj.playerId == userId)
     return (filtered.length > 0) ? false : true
   }
 
-  function calcAverageVote(array){
-    return +(array.reduce((acc, el)=> acc+el.vote, 0)/array.length).toFixed(1) || 0
+  function calcAverageVote(array) {
+    return +(array.reduce((acc, el) => acc + el.vote, 0) / array.length).toFixed(1) || 0
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getBet();
-    getUsers();    
+    getUsers();
   }, [])
-  
-  useEffect(()=>{
-    auth.onAuthStateChanged((user)=>{
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
       setUtente(user)
-      if(user){
+      if (user) {
         getUtente(user.uid)
         getMyBets(user.uid)
-                // console.log(utente);
+        // console.log(utente);
       } else {
         setMyBets(null)
       }
     })
 
-}, [auth])
+  }, [auth])
 
 
   return (
@@ -158,10 +158,19 @@ function App() {
       <Hero />
       {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
       <AccordionBet utente={utente} bets={bets} setBet={setBet} />
-      {window.innerWidth >= 600 && <Chart users = {users} /> }
-      {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
+      <div className="container-fluid my-5 p-5">
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <Chart users={users} />
+          </div>
+          <div className="col-12 col-md-6">
+            {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
+
+          </div>
+        </div>
+      </div>
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
-      <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted}/>
+      <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>
   )
 }
