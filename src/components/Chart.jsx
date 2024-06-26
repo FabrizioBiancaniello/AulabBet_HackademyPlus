@@ -23,7 +23,7 @@ export default function Chart({ users }) {
             panY: false,
             wheelX: "none",
             wheelY: "none",
-            paddingLeft: 0
+            paddingLeft: 0,
         }));
         // Add cursor
         let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
@@ -161,7 +161,7 @@ export default function Chart({ users }) {
             <div className="row justify-content-center">
                 <div className="chartContainer col-12">
                     <div className="p-1 chartScroll">
-                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 250}px` }}></div>
+                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 250}px`}}></div>
                     </div>
                 </div>
             </div>

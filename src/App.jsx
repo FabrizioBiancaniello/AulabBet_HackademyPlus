@@ -159,13 +159,12 @@ function App() {
       {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
       <AccordionBet utente={utente} bets={bets} setBet={setBet} />
       <div className="container-fluid my-5 p-5">
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <Chart users={users} />
-          </div>
-          <div className="col-12 col-md-6">
+        <div className="row justify-content-around">
+          <div className="col-12 col-md-4">
             {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
-
+          </div>
+          <div className="col-12 col-md-7">
+            <Chart users={users} />
           </div>
         </div>
       </div>
