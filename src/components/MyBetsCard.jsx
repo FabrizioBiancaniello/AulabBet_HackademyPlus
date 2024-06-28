@@ -10,13 +10,13 @@ export default function MyBetsCard({bet}) {
 
     return (
             <div className="row text-white align-items-center justify-content-between p-3 rounded-3 myBetContainer my-2">
-                <div className="col-12">
+                <div className="col-12 py-2">
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="m-0">Descrizione scommessa:</h5>
                         <span className="px-2 rounded-4 bg-yellow text-black">{bet.created}</span>
                     </div>
-                    <div>
-                        <p className="m-0 fw-light py-3">{bet.description}</p>
+                    <div className="overflow-y-auto py-3" style={{height : '80px'}}>
+                        <p className="m-0 fw-light ">{bet.description} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta hic dolor vel saepe facere nesciunt eaque quidem, nobis odio quod repellat praesentium ut nostrum cumque fuga neque quasi, animi fugit!</p>
 
                     </div>
                 </div>
