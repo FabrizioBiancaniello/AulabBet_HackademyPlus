@@ -84,12 +84,17 @@ body {
 }
 
 :root {
-  --yellow: rgb(236, 236, 35);
+  --yellow: #ffed00;
 }
 
-.bg-yellow{
+.bg-yellow {
   background-color: var(--yellow);
 }
+
+.text-a{
+  color: var(--yellow);
+}
+
 /* SCROLLBAR  */
 /* width */
 ::-webkit-scrollbar {
@@ -272,7 +277,7 @@ body {
   animation: bounce 5s linear infinite;
 } */
 
-.myBetContainer{
+.myBetContainer {
   background-color: rgb(23, 23, 23);
   backdrop-filter: blur(15px);
   /* border: 2px solid rgba(246, 255, 0, 0.466); */
@@ -464,7 +469,26 @@ textarea:focus {
   background-color: #1d1d1b;
   box-shadow: -5px 5px 10px black;
   height: 600px;
-  overflow: hidden;
+  overflow-y: hidden;
+}
+.ranking-mobile-scrolling{
+  min-width: 700px;
+  overflow-x: auto;
+}
+.rankingScrollBar{
+  overflow-x: auto;
+}
+
+.rankingScrollBar::-webkit-scrollbar {
+  height: 10px;
+}
+
+.rankingScrollBar::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+
+.rankingScrollBar::-webkit-scrollbar-thumb {
+  border: 1px solid rgb(255, 234, 0);
 }
 
 .rankingPlayer {
@@ -534,6 +558,175 @@ h6 {
   padding: 20px;
   border: 1px solid var(--yellow);
   box-shadow: -2px 2px 10px black;
+}
+
+
+
+
+
+
+
+/* prove card */
+.card-list {
+  text-align: center;
+  font-weight: 800;
+  text-transform: uppercase;
+
+}
+
+.card__border,
+.card__border-line,
+.card__inner {
+  -webkit-clip-path: polygon(50% 0, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+  clip-path: polygon(50% 0, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+}
+
+.userCard {
+  -webkit-filter: drop-shadow(0px 0px 5px var(--color)) drop-shadow(0px 0px 15px var(--color));
+  filter: drop-shadow(0px 0px 5px var(--color)) drop-shadow(0px 0px 15px var(--color));
+  position: relative;
+  max-width: 400px;
+  margin: auto;
+}
+
+.card__border {
+  position: absolute;
+  width: 98%;
+  height: 102%;
+  background: var(--color);
+  left: 1%;
+  top: 1%;
+}
+
+.card__border-line {
+  position: absolute;
+  width: 95%;
+  height: 99%;
+  left: 2.5%;
+  top: 2.5%;
+  background: -webkit-gradient(linear,
+      left top, left bottom,
+      color-stop(33%, hsl(0, 0%, 0%)),
+      color-stop(70%, hsl(0, 0%, 0%)));
+  background: linear-gradient(to bottom,
+      hsla(0, 0%, 0%, 0.562) 33%,
+      hsla(266, 100%, 50%, 0.658) 90%);
+}
+
+.card__inner {
+  background: -webkit-linear-gradient(179deg, var(--color), #8b7956 90%);
+  background: linear-gradient(179deg, var(--color), #e3a83b 90%);
+  padding: 0.5rem 0.2rem 0rem;
+  width: 92%;
+  margin-top: 4.8%;
+  margin-left: 4%;
+}
+
+.card__img {
+  display: flex;
+  padding: 0 1rem;
+  background: repeating-linear-gradient(126deg,
+      hsla(0, 0%, 100%, 0.219) 0%,
+      #ffffff57 1.2%,
+      transparent 1.19%,
+      transparent 4%,
+      transparent 4.1%);
+
+  @media screen and (max-width: 550px) {
+    padding: 0 .2rem;
+  }
+}
+
+.img__team {
+  flex: 1 1 30%;
+  background: rgba(0, 0, 0, 0.39);
+  backdrop-filter: blur(8px);
+  display: flex;
+  /* padding: 0.3rem; */
+  align-items: center;
+  padding-top: 15%;
+}
+
+.img__athlete {
+  flex: 1 1 75%;
+  padding-top: 8%;
+
+  img {
+    margin-left: -8% ;
+  }
+}
+
+.card__type {
+  width: 50%;
+  width: min-content;
+  margin: auto;
+  padding: 0 10%;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  margin-top: -6%;
+
+  @media screen and (max-width: 500px) {
+    font-size: min(1.2rem, 5vw);
+  }
+}
+
+.card__text {
+  position: relative;
+  padding-bottom: 16%;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url('https://i.pinimg.com/originals/80/7d/ce/807dcedf950725fea6b935cdb6ffb4a6.jpg');
+    /* Sand texture*/
+    opacity: 0.3;
+    z-index: -1;
+  }
+}
+
+.name {
+  font-size: 1.5rem;
+  text-align: center;
+  color: white;
+  margin: 2% 0 0;
+  position: relative;
+
+  &:before {
+    content: '';
+    background: -webkit-gradient(linear,
+        left top, right top,
+        from(transparent),
+        color-stop(#ff0000),
+        color-stop(rgb(255, 0, 0)),
+        color-stop(#ff0000),
+        to(transparent));
+    background: linear-gradient(to right,
+        transparent,
+        #3730305c,
+        black,
+        #0000004f,
+        transparent);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5%;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: min(10vw, 2.5rem);
+  }
+}
+
+.card-date{
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  width: fit-content;
 }
 
 

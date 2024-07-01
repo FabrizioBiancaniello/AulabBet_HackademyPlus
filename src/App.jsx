@@ -1,29 +1,14 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from "firebase/firestore";
+import {db, auth} from "./utils/firebaseConfig.js"
 import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
 import './App.css'
 import ContainerBets from './components/ContainerBets';
 import Hero from './components/Hero'
-import MyBetsContainer from './components/MyBetsContainer.jsx';
 import Chart from './components/Chart.jsx'
 import MyProfileContainer from './components/MyProfileContainer.jsx';
 import Ranking from './components/Ranking.jsx';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD-UcNEr94I0KE5BqhuXQrGw03VU35cUuk",
-  authDomain: "aulabetplus.firebaseapp.com",
-  projectId: "aulabetplus",
-  storageBucket: "aulabetplus.appspot.com",
-  messagingSenderId: "876845694041",
-  appId: "1:876845694041:web:a13b1c1caae37e4acb8548"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app)
 
 
 
@@ -63,10 +48,9 @@ function App() {
       const items = [];
       querySnapshot.forEach(doc => {
         if (doc.data().voted.length > 0) {
-          items.push({ name: doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0), bulletSettings: { src: "https://picsum.photos/301" } });
+          items.push({ name: doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0), bulletSettings: { src: "public/default.png" } });
         }
       });
-      console.log(items)
       setUsers(items.reverse())
 
     });
@@ -157,8 +141,8 @@ function App() {
     <>
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
-      <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} />
-      <Ranking bets={bets} />
+      <Ranking bets={bets}/>
+      <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
             {/* {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />} */}
 
       <Chart users={users} />

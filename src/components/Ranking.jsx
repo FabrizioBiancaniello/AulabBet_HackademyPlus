@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export default function Ranking({bets}){
     
     return (
@@ -12,9 +10,9 @@ export default function Ranking({bets}){
             <div className="row">
                 <div className="col-12">
                 <div className='rankingContainer rounded-3 px-3 py-5'>
-                    <div className="px-3 h-100 overflow-auto">
-                        <div className='row'>
-                            <div className="col-12">
+                    <div className="px-3 h-100 ">
+                        <div className='row rankingScrollBar'>
+                            <div className="col-12 ranking-mobile-scrolling">
                                 <div className="row mb-2 px-2">
                                     <div className=" d-flex align-items-center col-1 ps-3">
                                         <i className="bi bi-trophy-fill color-yellow classifica-titles"></i>
@@ -34,7 +32,6 @@ export default function Ranking({bets}){
                                     {/* QUI SE CICLANO E PERSONE */}
                                     {bets && bets.toSorted((a, b) => b.averageVote - a.averageVote).slice(0, 10).map((bet, i) => {
                                         return (
-                                            // <div className='bg-secondary text-center border' key={bet.id}>{bet.averageVote} - {bet.name}</div>
                                             <div key={bet.id} className="col-12 bg-bet rounded my-1">
                                                 <div className="row ">
                                                     <div className="col-1">

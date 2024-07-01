@@ -8,18 +8,11 @@ export default function MyBetsCard({bet}) {
     let value = 0;
 
     return (
-            <div className="row text-white align-items-center justify-content-between p-3 rounded-3 myBetContainer my-2">
-                <div className="col-12">
-                    <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="m-0">Descrizione scommessa:</h5>
-                        <span className="px-2 rounded-4 bg-yellow text-black">{bet.created}</span>
-                    </div>
-                    <div>
-                        <p className="m-0 fw-light py-3">{bet.description}</p>
-
-                    </div>
-                </div>
-                <div className="col-7 d-flex justify-content-end ms-auto">
+            <div className="row text-white align-items-center justify-content-between p-3 rounded-3 myBetContainer mb-4 position-relative">
+                    <span className="px-2 rounded-4 bg-yellow text-black card-date">{bet.created}</span>
+                <div className="col-12 d-flex justify-content-center mb-3">
+                    <div className="d-flex align-items-center">
+                        <p className="m-0 pe-3">Media Voti: </p>
                     <ReactVisibilitySensor>
                         {({ isVisible }) => {
                             if (visible == false && isVisible) {
@@ -27,7 +20,7 @@ export default function MyBetsCard({bet}) {
                                 visible = true;
                             }
                             return (
-                                <div className="circularBox me-2" style={{ 'width': '15%' }}>
+                                <div className="circularBox me-2" style={{ 'width': '50px' }}>
                                     <CircularProgressbar className="w-100 h-100" value={value} maxValue={5}
                                         styles={buildStyles({
                                             // rotation: 1,
@@ -46,8 +39,21 @@ export default function MyBetsCard({bet}) {
                             );
                         }}
                     </ReactVisibilitySensor>
-                    <div className="totVotiBox" style={{ 'width': '15%' }}>{bet.vote.length}</div>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <div className="totVotiBox" style={{ 'width': '50px' }}>{bet.vote.length}</div>
+                        <p className="m-0 p-3">Totale Voti </p>
+                    </div>
                     {/* <p className="text-center mt-2">Media</p> */}
+                </div>
+                <div className="col-12 py-2">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h6 className="m-0 mb-2 text-secondary">Descrizione scommessa:</h6>
+                    </div>
+                    <div className="overflow-y-auto pb-3" style={{height : '80px'}}>
+                        <p className="m-0 fw-light ">{bet.description} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta hic dolor vel saepe facere nesciunt eaque quidem, nobis odio quod repellat praesentium ut nostrum cumque fuga neque quasi, animi fugit!</p>
+
+                    </div>
                 </div>
             </div>
     )
