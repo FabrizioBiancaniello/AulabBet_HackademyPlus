@@ -7,7 +7,7 @@ export default function ContainerBets({ bets, updateVote, utente, notVoted }) {
 
 
     return (
-            <div className="container py-5">
+            <div className="container">
                 <h2 className="display-2 text-center my-5 border-bottom secondary-title">BET ATTIVE</h2>
                 <div className="row" >
                     {bets && bets.map((bet) => {

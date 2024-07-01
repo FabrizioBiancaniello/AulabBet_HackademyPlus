@@ -4,12 +4,13 @@ import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, ser
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
-import AccordionBet from './components/AccordionBet';
 import './App.css'
 import ContainerBets from './components/ContainerBets';
 import Hero from './components/Hero'
 import MyBetsContainer from './components/MyBetsContainer.jsx';
 import Chart from './components/Chart.jsx'
+import MyProfileContainer from './components/MyProfileContainer.jsx';
+import Ranking from './components/Ranking.jsx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-UcNEr94I0KE5BqhuXQrGw03VU35cUuk",
@@ -156,19 +157,12 @@ function App() {
     <>
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
-      {/* <!-- Contenitore Crea SCOMMESSA e CLASSIFICA  --> */}
-      <AccordionBet utente={utente} bets={bets} setBet={setBet} />
-      <div className="container-fluid my-5 p-5">
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <Chart users={users} />
-          </div>
-          <div className="col-12 col-md-6">
-            {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />}
+      <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} />
+      <Ranking bets={bets} />
+            {/* {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />} */}
 
-          </div>
-        </div>
-      </div>
+      <Chart users={users} />
+
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>
