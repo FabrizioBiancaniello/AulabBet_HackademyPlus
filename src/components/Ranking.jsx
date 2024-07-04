@@ -1,14 +1,14 @@
 export default function Ranking({bets}){
     
     return (
-        <div className="container-fluid my-5">
-            <div className='row'>
-                <div className="col-12">
-                    <h2 className="display-2 text-center secondary-title">CLASSIFICA</h2>
+        <div className="container">
+            <div className='row justify-content-center'>
+                <div className="col-12 col-lg-8 py-3 ">
+                    <h2 className="display-5 text-center secondary-title">CLASSIFICA GENERALE</h2>
                 </div>
             </div>
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 py-2">
                 <div className='rankingContainer rounded-3 px-3 py-5'>
                     <div className="px-3 h-100 ">
                         <div className='row rankingScrollBar'>

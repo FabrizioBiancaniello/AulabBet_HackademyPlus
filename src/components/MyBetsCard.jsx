@@ -51,7 +51,7 @@ export default function MyBetsCard({bet}) {
                         <h6 className="m-0 mb-2 text-secondary">Descrizione scommessa:</h6>
                     </div>
                     <div className="overflow-y-auto pb-3" style={{height : '80px'}}>
-                        <p className="m-0 fw-light ">{bet.description} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta hic dolor vel saepe facere nesciunt eaque quidem, nobis odio quod repellat praesentium ut nostrum cumque fuga neque quasi, animi fugit!</p>
+                        <p className="m-0 fw-light ">{bet.description}</p>
 
                     </div>
                 </div>
