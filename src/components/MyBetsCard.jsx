@@ -29,7 +29,7 @@ export default function MyBetsCard({bet}) {
                                             transition: 'stroke-dashoffset 0.5s ease 0s',
                                             pathTransitionDuration: 0.5,
                                             // Colors
-                                            pathColor: `rgb(150, 0, 108)`,
+                                            pathColor: `hsla(266, 100%, 50%, 1)`,
                                             trailColor: 'rgb(236, 236, 35, 0.1)',
                                             backgroundColor: '#3e98c7',
                                         })}

@@ -58,7 +58,7 @@ function App() {
 
   async function getMyBets(userId) {
     const colRef = collection(db, "bets");
-    const q = query(colRef, where("playerId", "==", userId))
+    const q = query(colRef, where("playerId", "==", userId), orderBy("created"))
     onSnapshot(q, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach(doc => {
@@ -141,8 +141,8 @@ function App() {
     <>
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
-      <Ranking bets={bets}/>
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
+      <Ranking bets={bets}/>
       <Chart users={users} />
       
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
