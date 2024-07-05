@@ -1,10 +1,10 @@
 export default function Ranking({ bets }) {
 
     return (
-        <div className="container-fluid my-5">
-            <div className='row'>
-                <div className="col-12">
-                    <h2 className="display-2 text-center secondary-title">CLASSIFICA</h2>
+        <div className="container">
+            <div className='row justify-content-center'>
+                <div className="col-12 col-lg-8 py-3 ">
+                    <h2 className="display-5 text-center secondary-title">CLASSIFICA GENERALE</h2>
                 </div>
             </div>
             <div className="row">

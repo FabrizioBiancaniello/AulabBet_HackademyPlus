@@ -125,9 +125,9 @@ body {
 }
 
 .secondary-title {
-  color: var(--yellow);
+  color: white;
   text-shadow: -2px 2px 5px black;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .bg-p {
@@ -306,14 +306,27 @@ body {
     transform: translate(0, 0);
   }
 } */
+.bg-section-non{
+  background-color: #1d1d1b;
+  border-radius: 10px;
+  padding: 20px;
+  text-shadow: 2px 2px black;
+}
 
 .createBetContainer {
   height: 500px;
   border-radius: 10px;
-  box-shadow: -5px 5px 10px rgb(0, 0, 0);
   padding: 20px;
-  background-color: #1d1d1b;
   position: relative;
+}
+
+.bet-modal{
+  background-color: #1d1d1b;
+  box-shadow: -5px 5px 10px rgb(0, 0, 0);
+}
+
+.bg-modal{
+  backdrop-filter: blur(7px) saturate(120%);
 }
 
 .alert-box {

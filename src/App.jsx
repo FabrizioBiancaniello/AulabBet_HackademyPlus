@@ -85,18 +85,18 @@ function App() {
       const betRef = doc(db, "users", utente.id);
       await updateDoc(betRef, { bets: arrayUnion(docRef.id) })
       getUtente(utente.id)
+
       //Reset Campi
       setDescription("");
-
       setMessage({ type: "correct", body: "Scommessa Inserita correttamente" })
       setTimeout(() => {
         setMessage("")
-      }, 5000)
+      }, 3000)
     } else {
       setMessage({ type: "error", body: "La descrizione è troppo corta" })
       setTimeout(() => {
         setMessage("")
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -143,10 +143,8 @@ function App() {
       <Hero />
       <Ranking bets={bets}/>
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
-            {/* {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />} */}
-
       <Chart users={users} />
-
+      
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>
