@@ -31,7 +31,7 @@ function App() {
       const items = [];
       querySnapshot.forEach(doc => {
         let data = doc.data().created
-        let dataLocale = data.toDate()
+        let dataLocale = data?.toDate()
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
         items.push({ ...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
@@ -63,7 +63,7 @@ function App() {
       const items = [];
       querySnapshot.forEach(doc => {
         let data = doc.data().created
-        let dataLocale = data.toDate()
+        let dataLocale = data?.toDate()
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         const formattedDate = dataLocale.toLocaleDateString('it-IT', options);
         items.push({ ...doc.data(), id: doc.id, created: formattedDate, averageVote: calcAverageVote(doc.data().vote) });
