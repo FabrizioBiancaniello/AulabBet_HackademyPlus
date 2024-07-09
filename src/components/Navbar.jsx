@@ -14,6 +14,7 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
             name: nome,
             bets: [],
             voted: [],
+            img: "/default.png"
         });
 
         inputUsername.value = "";

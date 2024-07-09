@@ -9,10 +9,10 @@ export default function UserCard({ utente, calcAverageVote, setBet }) {
                 <div className="card__inner">
                     <div className="card__img">
                         <div className="img__team">
-                            <img className='img-fluid' src="public\logoAulab.png" alt="Team: Ferrari logo" />
+                            <img className='img-fluid' src="/logoAulab.png" alt="Team: Ferrari logo" />
                         </div>
                         <div className="img__athlete">
-                            <img className='img-fluid' src="public\default.png" alt="Charles Leclerc" />
+                            <img className='img-fluid' src={utente?.img ?? "/default.png"} alt="Charles Leclerc" />
                         </div>
                     </div>
                     <div className="card__text text-white">
