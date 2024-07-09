@@ -152,7 +152,7 @@ export default function Chart({ users }) {
         <div className="container-fluid my-5">
             <div className="row">
                 <div className="col-12">
-                    <h2 className="display-2 text-center secondary-title">STATISTICHE</h2>
+                    <h2 className="display-4 text-center secondary-title">STATISTICHE</h2>
                 </div>
                 <div className="col-12">
                     <h3 className="secondary-title fs-4 text-center">Media voti di tutti gli utenti</h3>

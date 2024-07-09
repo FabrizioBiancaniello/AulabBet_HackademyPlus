@@ -22,7 +22,6 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                     </div>
                     <p className="mb-0">{bet.created}</p>
                 </div>
-            
                 <div className="container-fluid">
                     <div className="row justify-content-around pt-2">
                         <div className="col-5 col-lg-4 d-flex flex-column align-items-center justify-content-center">
@@ -42,7 +41,7 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
                                                     transition: 'stroke-dashoffset 0.5s ease 0s',
                                                     pathTransitionDuration: 0.5,
                                                     // Colors
-                                                    pathColor: `rgb(150, 0, 108)`,
+                                                    pathColor: `hsla(266, 100%, 50%, 1)`,
                                                     trailColor: 'rgb(236, 236, 35, 0.1)',
                                                     backgroundColor: '#3e98c7',
                                                 })}

@@ -58,7 +58,7 @@ function App() {
 
   async function getMyBets(userId) {
     const colRef = collection(db, "bets");
-    const q = query(colRef, where("playerId", "==", userId))
+    const q = query(colRef, where("playerId", "==", userId), orderBy("created"))
     onSnapshot(q, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach(doc => {
@@ -85,18 +85,18 @@ function App() {
       const betRef = doc(db, "users", utente.id);
       await updateDoc(betRef, { bets: arrayUnion(docRef.id) })
       getUtente(utente.id)
+
       //Reset Campi
       setDescription("");
-
       setMessage({ type: "correct", body: "Scommessa Inserita correttamente" })
       setTimeout(() => {
         setMessage("")
-      }, 5000)
+      }, 3000)
     } else {
       setMessage({ type: "error", body: "La descrizione è troppo corta" })
       setTimeout(() => {
         setMessage("")
-      }, 5000)
+      }, 3000)
     }
   }
 
@@ -141,12 +141,10 @@ function App() {
     <>
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
-      <Ranking bets={bets}/>
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
-            {/* {utente && <MyBetsContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} />} */}
-
+      <Ranking bets={bets}/>
       <Chart users={users} />
-
+      
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>
