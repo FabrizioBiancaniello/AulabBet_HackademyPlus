@@ -6,7 +6,7 @@ export default function MyProfileContainer({ utente, setBet, myBets, calcAverage
         <div className="container py-5">
             <div className='row justify-content-center pb-5'>
                 <div className="col-12 col-lg-8 py-3 ">
-                    <h2 className="display-4 text-center secondary-title">SEZIONE PERSONALE</h2>
+                    <h2 className="display-4 text-center secondary-title">IL MIO PROFILO</h2>
                 </div>
             </div>
             {
