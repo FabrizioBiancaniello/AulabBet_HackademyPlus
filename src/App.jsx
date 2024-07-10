@@ -48,7 +48,7 @@ function App() {
       const items = [];
       querySnapshot.forEach(doc => {
         if (doc.data().voted.length > 0) {
-          items.push({ name: doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0), bulletSettings: { src: utente?.img ?? "/default.png" } });
+          items.push({ name: doc.data().name, value: (doc.data().voted[0]?.vote ? calcAverageVote(doc.data().voted) : 0), bulletSettings: { src: doc.data().img ?? "/default.png" } });
         }
       });
       setUsers(items.reverse())
