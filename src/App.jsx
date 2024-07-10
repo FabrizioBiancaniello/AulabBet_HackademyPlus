@@ -1,4 +1,4 @@
-import {db, auth} from "./utils/firebaseConfig.js"
+import { db, auth } from "./utils/firebaseConfig.js"
 import { collection, doc, addDoc, getDoc, where, orderBy, query, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, updateDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react'
 import Navbar from "./components/Navbar.jsx"
@@ -142,9 +142,19 @@ function App() {
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
-      <Ranking bets={bets}/>
-      <Chart users={users} />
-      
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12 col-md-5">
+            <Ranking bets={bets} />
+
+          </div>
+          <div className="col-12 col-md-7">
+            <Chart users={users} />
+
+          </div>
+        </div>
+      </div>
+
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>

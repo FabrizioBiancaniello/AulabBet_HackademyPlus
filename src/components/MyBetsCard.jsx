@@ -10,7 +10,7 @@ export default function MyBetsCard({bet}) {
     return (
             <div className="row text-white align-items-center justify-content-between p-3 rounded-3 myBetContainer mb-4 position-relative">
                     <span className="px-2 rounded-4 bg-yellow text-black card-date">{bet.created}</span>
-                <div className="col-12 d-flex justify-content-center mb-3">
+                <div className="col-12 d-flex justify-content-center mb-1">
                     <div className="d-flex align-items-center">
                         <p className="m-0 pe-3">Media Voti: </p>
                     <ReactVisibilitySensor>

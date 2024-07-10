@@ -153,14 +153,12 @@ export default function Chart({ users }) {
             <div className="row">
                 <div className="col-12">
                     <h2 className="display-4 text-center secondary-title">STATISTICHE</h2>
-                </div>
-                <div className="col-12">
                     <h3 className="secondary-title fs-4 text-center">Media voti di tutti gli utenti</h3>
                 </div>
             </div>
             <div className="row justify-content-center px-3">
-                <div className="chartContainer col-12">
-                    <div className="p-1 chartScroll">
+                <div className="chartContainer col-12 mt-3">
+                    <div className="p-3 chartScroll">
                         <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 250}px`}}></div>
                     </div>
                 </div>

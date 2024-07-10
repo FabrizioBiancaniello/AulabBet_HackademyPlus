@@ -4,13 +4,13 @@ import UserCard from './UserCard'
 export default function MyProfileContainer({ utente, setBet, myBets, calcAverageVote }) {
     return (
         <div className="container py-5">
-            <div className='row justify-content-center pb-5'>
+            {/* <div className='row justify-content-center pb-5'>
                 <div className="col-12 col-lg-8 py-3 ">
                     <h2 className="display-4 text-center secondary-title">IL MIO PROFILO</h2>
                 </div>
-            </div>
+            </div> */}
             {
-                utente ? <div className="row justify-content-evenly">
+                utente ? <div className="row justify-content-around">
                     <div className="col-12 col-md-4">
                         <UserCard utente={utente} calcAverageVote={calcAverageVote} setBet={setBet} />
                     </div>
