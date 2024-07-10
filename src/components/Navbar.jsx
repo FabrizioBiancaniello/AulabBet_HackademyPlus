@@ -42,7 +42,11 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
         }
     }
 
-
+    function loginTest(e){
+        if(e.key == "Enter"){
+            signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential) => { const user = userCredential.user }).catch((err) => setLoginMessage("Email o Password errate, Riprova"))
+        }
+    }
 
     return (
         <nav className="navbar fixed-top">
@@ -98,17 +102,20 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
                                                     <p>{loginMessage}</p>
                                                 </div>
                                             }
+
                                             <div className="mt-5 mb-3">
                                                 <label htmlFor="loginEmail" className="form-label">Indirizzo Email</label>
                                                 <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" />
                                             </div>
                                             <div className=" mb-3">
                                                 <label htmlFor="loginPassword" className="form-label">Password</label>
-                                                <input type="password" className="form-control" id="loginPassword" />
+                                                <input onKeyDown={ (e)=> loginTest(e)} type="password" className="form-control" id="loginPassword" />
                                             </div>
                                             <div className="my-5 d-flex justify-content-center">
                                                 <button onClick={() => { signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential) => { const user = userCredential.user }).catch((err) => setLoginMessage("Email o Password errate, Riprova")) }} type="submit" className="btn-reg-login">LogIn</button>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 }

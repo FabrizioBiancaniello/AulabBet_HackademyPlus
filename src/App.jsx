@@ -75,23 +75,30 @@ function App() {
 
   async function setBet(description, setDescription, setMessage, utente) {
     if (description.length > 10) {
-      const docRef = await addDoc(collection(db, "bets"), {
-        playerId: utente.id,
-        name: utente.name,
-        description: description,
-        created: serverTimestamp(),
-        vote: []
-      });
-      const betRef = doc(db, "users", utente.id);
-      await updateDoc(betRef, { bets: arrayUnion(docRef.id) })
-      getUtente(utente.id)
+      try {
+        const docRef = await addDoc(collection(db, "bets"), {
+          playerId: utente.id,
+          name: utente.name,
+          description: description,
+          created: serverTimestamp(),
+          vote: []
+        });
+        const betRef = doc(db, "users", utente.id);
+        await updateDoc(betRef, { bets: arrayUnion(docRef.id) })
+        getUtente(utente.id)
 
-      //Reset Campi
-      setDescription("");
-      setMessage({ type: "correct", body: "Scommessa Inserita correttamente" })
-      setTimeout(() => {
-        setMessage("")
-      }, 3000)
+        //Reset Campi
+        setDescription("");
+        setMessage({ type: "correct", body: "Scommessa Inserita correttamente" })
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      } catch (error) {
+        setMessage({ type: "error", body: "Si e' verificato un problema, riprova" })
+        setTimeout(() => {
+          setMessage("")
+        }, 3000)
+      }
     } else {
       setMessage({ type: "error", body: "La descrizione è troppo corta" })
       setTimeout(() => {
@@ -146,11 +153,9 @@ function App() {
         <div className="row">
           <div className="col-12 col-md-5">
             <Ranking bets={bets} />
-
           </div>
           <div className="col-12 col-md-7">
             <Chart users={users} />
-
           </div>
         </div>
       </div>

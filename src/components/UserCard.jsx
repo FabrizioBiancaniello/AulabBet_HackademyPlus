@@ -1,6 +1,9 @@
 import Newbet from "./NewBet"
+import { useState } from "react";
 
 export default function UserCard({ utente, calcAverageVote, setBet }) {
+    const [message, setMessage] = useState("");
+
     return (
         <>
             <div className="userCard">
@@ -23,17 +26,23 @@ export default function UserCard({ utente, calcAverageVote, setBet }) {
                         </div>
                     </div>
                 </div>
+
             </div>
             {
-            utente?.bets?.length < 3 &&
-            <div className="d-flex justify-content-center">
-                <button className="my-5 btn-custom fs-5 w-50" data-bs-toggle="modal" data-bs-target="#newBet">NUOVA BET</button>
-            </div>
+                utente?.bets?.length < 3 &&
+                <div className="d-flex justify-content-center">
+                    <button className="my-5 btn-custom fs-5 w-50" data-bs-toggle="modal" data-bs-target="#newBet">NUOVA BET</button>
+                </div>
             }
 
 
             {/* Modal */}
-            <Newbet utente={utente} setBet={setBet}/>
+            <Newbet utente={utente} setBet={setBet} setMessage={setMessage} />
+            {message &&
+                <div className={`alert-box alert text-center fw-bold ${message.type == "error" ? "alert-danger" : "alert-success"}`} role="alert">
+                    {message.body}
+                </div>
+            }
         </>
     )
 }

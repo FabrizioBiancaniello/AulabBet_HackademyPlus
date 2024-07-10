@@ -332,10 +332,9 @@ body {
 }
 
 .alert-box {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
   text-shadow: none;
 }
 
