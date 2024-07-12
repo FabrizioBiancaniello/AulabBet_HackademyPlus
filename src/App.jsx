@@ -151,10 +151,10 @@ function App() {
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 col-md-5">
+          <div className="col-12 col-xxl-6">
             <Ranking bets={bets} />
           </div>
-          <div className="col-12 col-md-7">
+          <div className="col-12 col-xxl-6">
             <Chart users={users} />
           </div>
         </div>

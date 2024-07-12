@@ -3,19 +3,14 @@ import UserCard from './UserCard'
 
 export default function MyProfileContainer({ utente, setBet, myBets, calcAverageVote }) {
     return (
-        <div className="container py-5">
-            {/* <div className='row justify-content-center pb-5'>
-                <div className="col-12 col-lg-8 py-3 ">
-                    <h2 className="display-4 text-center secondary-title">IL MIO PROFILO</h2>
-                </div>
-            </div> */}
+        <div className="container" >
             {
-                utente ? <div className="row justify-content-around">
-                    <div className="col-12 col-md-4">
+                utente ? <div className="row justify-content-around align-items-center" style={{"minHeight": "80vh"}}>
+                    <div className="col-12 col-md-6">
                         <UserCard utente={utente} calcAverageVote={calcAverageVote} setBet={setBet} />
                     </div>
 
-                    <div className="col-12 col-md-5 p-3">
+                    <div className="col-10 col-md-5 my-5 my-md-0">
                         {myBets && myBets.length > 0 ? myBets.reverse().map((myBet) => {
                             return (
                                 <MyBetsCard key={myBet.id} bet={myBet} />

@@ -46,11 +46,11 @@ export default function Chart({ users }) {
 
         // Modify the appearance of the labels on the xAxis
         xRenderer.labels.template.setAll({
-            fontSize: (currentWidth * 0.007) + 10,
-            fontFamily: 'Arial, sans-serif',
-            fontWeight: "700",
+            fontSize: (currentWidth * 0.007) + 3,
+            fontFamily: "Poppins",
+            fontWeight: "600",
             oversizedBehavior: "truncate",
-            maxWidth: currentWidth * 0.25 < 250 ? currentWidth * 0.25 : 250,
+            maxWidth: currentWidth * 0.25 < 120 ? currentWidth * 0.25 : 120,
         });
 
         let yRenderer = am5xy.AxisRendererY.new(root, {});
@@ -67,7 +67,7 @@ export default function Chart({ users }) {
         });
 
         yRenderer.labels.template.setAll({
-            fontSize: 20,
+            fontSize: 15,
             fontFamily: 'Arial, sans-serif',
             fontWeight: "700",
         });
@@ -141,8 +141,10 @@ export default function Chart({ users }) {
     useEffect(() => {
         if (chartRef.current) {
             const { xAxis, series } = chartRef.current;
+            let userNames = users.map(user => user.name)
             xAxis.data.setAll(users);
             series.data.setAll(users);
+            
         }
     }, [users, currentWidth]);
 
@@ -159,7 +161,7 @@ export default function Chart({ users }) {
             <div className="row justify-content-center px-3">
                 <div className="chartContainer col-12 mt-3">
                     <div className="p-3 chartScroll">
-                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 250}px`}}></div>
+                        <div id="chartdiv" className="chartDiv" style={{ width: `${users?.length * (currentWidth * 0.25)}px`, maxWidth: `${users?.length * 120}px`}}></div>
                     </div>
                 </div>
             </div>

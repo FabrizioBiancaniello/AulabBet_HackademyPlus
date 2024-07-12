@@ -91,7 +91,7 @@ body {
   background-color: var(--yellow);
 }
 
-.text-a{
+.text-a {
   color: var(--yellow);
 }
 
@@ -217,6 +217,7 @@ body {
   background-color: #1d1d1b;
   color: white;
   box-shadow: -5px 5px 10px rgb(0, 0, 0);
+  width: 90%;
 }
 
 
@@ -257,6 +258,8 @@ body {
   font-weight: 400;
   text-shadow: 1px 1px 3px black;
 }
+
+
 
 .classifica-titles {
   font-size: calc(7px + 0.7vw);
@@ -306,7 +309,7 @@ body {
     transform: translate(0, 0);
   }
 } */
-.bg-section-non{
+.bg-section-non {
   background-color: #1d1d1b;
   border-radius: 10px;
   padding: 20px;
@@ -322,12 +325,12 @@ body {
   position: relative;
 }
 
-.bet-modal{
+.bet-modal {
   background-color: #1d1d1b;
   box-shadow: -5px 5px 10px rgb(0, 0, 0);
 }
 
-.bg-modal{
+.bg-modal {
   backdrop-filter: blur(7px) saturate(120%);
 }
 
@@ -346,7 +349,7 @@ body {
 }
 
 .p-description {
-  height: 200px;
+  height: 120px;
   background-color: rgba(255, 255, 255, 0.377);
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -485,11 +488,13 @@ textarea:focus {
   height: 600px;
   overflow-y: hidden;
 }
-.ranking-mobile-scrolling{
+
+.ranking-mobile-scrolling {
   min-width: 700px;
   overflow-x: auto;
 }
-.rankingScrollBar{
+
+.rankingScrollBar {
   overflow-x: auto;
 }
 
@@ -609,8 +614,12 @@ h6 {
   -webkit-filter: drop-shadow(0px 0px 5px var(--color)) drop-shadow(0px 0px 15px var(--color));
   filter: drop-shadow(0px 0px 5px var(--color)) drop-shadow(0px 0px 15px var(--color));
   position: relative;
-  max-width: 400px;
+  max-width: 350px;
   margin: auto;
+
+  @media screen and (max-width: 600px) {
+    width: 75%;
+  }
 }
 
 .card__border {
@@ -656,7 +665,7 @@ h6 {
       transparent 4%,
       transparent 4.1%);
 
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 600px) {
     padding: 0 .2rem;
   }
 }
@@ -676,7 +685,8 @@ h6 {
   padding-top: 8%;
 
   img {
-    margin-left: -8% ;
+    margin-left: auto;
+
   }
 }
 
@@ -689,7 +699,7 @@ h6 {
   font-size: 1.5rem;
   margin-top: -6%;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     font-size: min(1.2rem, 5vw);
   }
 }
@@ -709,6 +719,10 @@ h6 {
     /* Sand texture*/
     opacity: 0.3;
     z-index: -1;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding-bottom: 10%;
   }
 }
 
@@ -742,11 +756,11 @@ h6 {
   }
 
   @media screen and (max-width: 500px) {
-    font-size: min(10vw, 2.5rem);
+    font-size: min(10vw, 1.5rem);
   }
 }
 
-.card-date{
+.card-date {
   position: absolute;
   top: -10px;
   left: 30px;
@@ -765,7 +779,7 @@ h6 {
 
 
 /* MOBILE  */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .chartDiv {
     height: 300px;
   }

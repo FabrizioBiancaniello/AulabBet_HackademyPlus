@@ -50,7 +50,7 @@ export default function MyBetsCard({bet}) {
                     <div className="d-flex justify-content-between align-items-center">
                         <h6 className="m-0 mb-2 text-secondary">Descrizione scommessa:</h6>
                     </div>
-                    <div className="overflow-y-auto pb-3" style={{height : '80px'}}>
+                    <div className="overflow-y-auto pb-3" style={{height : '70px'}}>
                         <p className="m-0 fw-light ">{bet.description}</p>
 
                     </div>

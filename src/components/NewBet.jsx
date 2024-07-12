@@ -12,7 +12,7 @@ export default function Newbet({ setBet, utente, setMessage }) {
                     <div className="modal-header border-0 d-flex justify-content-between">
                         <h3 className='text-white'><span className='text-a fs-2'>{utente?.bets?.length ?? 0}</span>/3</h3>
                         <button type="button" className="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="bi bi-x-lg fs-4 text-white"></i>
+                            <i className="bi bi-x-lg fs-4 text-white"></i>
                         </button>
                     </div>
                     <div className="modal-body">
