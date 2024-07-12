@@ -13,8 +13,8 @@ export default function Card({ bet, updateVote, utente, notVoted }) {
 
 
     return (
-        <div className='col-12 col-md-6 col-xl-4 my-2'>
-            <div className="bet-box">
+        <div className='col-12 col-md-6 col-xl-4 my-3'>
+            <div className="bet-box mx-auto">
                 <div className="d-flex justify-content-between mb-3">
                     <div className="w-75">
 

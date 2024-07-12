@@ -2,8 +2,8 @@ export default function Ranking({ bets }) {
 
     return (
         <div className="container-fluid">
-            <div className='row justify-content-center pt-4'>
-                <div className="col-12 py-3 mt-5">
+            <div className='row justify-content-center pt-xl-4'>
+                <div className="col-12 py-3 mt-xl-5">
                     <h2 className="display-5 text-center secondary-title">CLASSIFICA GENERALE</h2>
                 </div>
             </div>
@@ -36,7 +36,7 @@ export default function Ranking({ bets }) {
                                                     <div className="row ">
                                                         <div className="col-1">
                                                             <div className='rankingPlayer py-2 mb-1'>
-                                                                <p style={{ color: `rgb(${Math.round(Math.random() * (255))},${Math.round(Math.random() * (255))}, ${Math.round(Math.random() * (255))})` }} className='m-0 fw-bold'>#{i + 1}</p>
+                                                                <p className='m-0 fw-bold'>#{i + 1}</p>
                                                             </div>
                                                         </div>
                                                         <div className="col-3">
