@@ -543,6 +543,17 @@ h6 {
   margin: 0;
 }
 
+/* PAGINATION  */
+.page-link{
+  color: var(--yellow);
+}
+
+.active>.page-link, .page-link.active {
+  background: var(--yellow);
+  border: 1px solid var(--yellow);
+  color: black;
+}
+
 
 /* CHART  */
 .chartDiv {
