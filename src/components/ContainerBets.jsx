@@ -5,13 +5,13 @@ import Card from "./Card.jsx";
 
 export default function ContainerBets({ bets, updateVote, utente, notVoted }) {
     const [currentPage, setCurrentPage] = useState(1);
-    const betsPerPage = 3;
+    const betsPerPage = 9;
 
     const indexOfLastBet = currentPage * betsPerPage;
     const indexOfFirstBet = indexOfLastBet - betsPerPage;
-    const currentBets = bets.slice(indexOfFirstBet, indexOfLastBet);
+    const currentBets = bets?.slice(indexOfFirstBet, indexOfLastBet);
 
-    const totalPages = Math.ceil(bets.length / betsPerPage);
+    const totalPages = Math.ceil(bets?.length / betsPerPage);
 
     const getPaginationGroup = () => {
         let start = Math.floor((currentPage - 1) / 5) * 5;

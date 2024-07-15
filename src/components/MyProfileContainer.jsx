@@ -3,7 +3,7 @@ import UserCard from './UserCard'
 
 export default function MyProfileContainer({ utente, setBet, myBets, calcAverageVote }) {
     return (
-        <div className="container" >
+        <div className="container">
             {
                 utente ? <div className="row justify-content-around align-items-center" style={{"minHeight": "80vh"}}>
                     <div className="col-12 col-md-6">

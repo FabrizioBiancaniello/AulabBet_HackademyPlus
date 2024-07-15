@@ -149,17 +149,8 @@ function App() {
       <Navbar auth={auth} db={db} utente={utente} setUtente={setUtente} calcAverageVote={calcAverageVote} getUtente={getUtente} />
       <Hero />
       <MyProfileContainer myBets={myBets} utente={utente} updateVote={updateVote} notVoted={notVoted} bets={bets} setBet={setBet} calcAverageVote={calcAverageVote} />
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 col-xxl-6">
-            <Ranking bets={bets} />
-          </div>
-          <div className="col-12 col-xxl-6">
-            <Chart users={users} />
-          </div>
-        </div>
-      </div>
-
+      <Ranking bets={bets} />
+      <Chart users={users} />
       {/* <!-- Contenitore SCOMMESSE inserite --> */}
       <ContainerBets bets={bets} utente={utente} updateVote={updateVote} notVoted={notVoted} />
     </>

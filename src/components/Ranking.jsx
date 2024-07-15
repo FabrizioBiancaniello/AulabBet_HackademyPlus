@@ -1,7 +1,7 @@
 export default function Ranking({ bets }) {
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             <div className='row justify-content-center pt-xl-4'>
                 <div className="col-12 py-3 mt-xl-5">
                     <h2 className="display-5 text-center secondary-title">CLASSIFICA GENERALE</h2>

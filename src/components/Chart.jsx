@@ -151,7 +151,7 @@ export default function Chart({ users }) {
 
 
     return (
-        <div className="container-fluid my-5">
+        <div className="container my-5">
             <div className="row">
                 <div className="col-12">
                     <h2 className="display-4 text-center secondary-title">STATISTICHE</h2>
