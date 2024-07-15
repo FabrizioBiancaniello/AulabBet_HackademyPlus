@@ -25,6 +25,13 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
     function createAccount(event) {
         event.preventDefault()
         if (inputPassword.value.length >= 8) {
+            if (inputPassword.value !== inputConfirmPassword.value) {
+                setRegisterMessage("Le Password non corrispondono")
+                setTimeout(() => {
+                    setRegisterMessage("")
+                }, 5000);
+                return
+            }
             createUserWithEmailAndPassword(auth, inputEmail.value, inputPassword.value)
                 .then((userCredential) => createUserFirestore(userCredential.user.uid, inputUsername.value))
                 .catch(() => {
@@ -42,9 +49,22 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
         }
     }
 
-    function loginTest(e){
-        if(e.key == "Enter"){
+    function loginEnter(e) {
+        if (e.key == "Enter") {
             signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential) => { const user = userCredential.user }).catch((err) => setLoginMessage("Email o Password errate, Riprova"))
+        }
+    }
+
+    function showPassword(e, field) {
+        e.preventDefault();
+        if (field.type == "password") {
+            field.setAttribute("type", "text")
+            e.target.classList.add("bi-eye-slash-fill")
+            e.target.classList.remove("bi-eye-fill")
+        } else {
+            field.setAttribute("type", "password")
+            e.target.classList.remove("bi-eye-slash-fill")
+            e.target.classList.add("bi-eye-fill")
         }
     }
 
@@ -84,7 +104,18 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
                                             </div>
                                             <div className="mb-3">
                                                 <label htmlFor="inputPassword" className="form-label">Password</label>
-                                                <input required type="password" className="form-control" id="inputPassword" />
+                                                <div className="position-relative">
+                                                    <input required type="password" className="form-control pe-5" id="inputPassword" />
+                                                    <i onClick={(e) => showPassword(e, inputPassword)} className="iconPass bi bi-eye-fill"></i>
+                                                    {/* <button onClick={(e) => showPassword(e, inputPassword)}>mostra</button> */}
+                                                </div>
+                                            </div>
+                                            <div className="mb-3">
+                                                <label htmlFor="inputConfirmPassword" className="form-label">Conferma Password</label>
+                                                <div className="position-relative">
+                                                    <input required type="password" className="form-control pe-5" id="inputConfirmPassword" />
+                                                    <i onClick={(e) => showPassword(e, inputConfirmPassword)} className="iconPass bi bi-eye-fill"></i>
+                                                </div>
                                             </div>
                                             <div className="d-flex justify-content-center">
                                                 <button onClick={(event) => createAccount(event)} type="submit" className="btn-reg-login mt-4">Registrati</button>
@@ -109,10 +140,13 @@ export default function Navbar({ auth, db, utente, calcAverageVote, getUtente })
                                             </div>
                                             <div className=" mb-3">
                                                 <label htmlFor="loginPassword" className="form-label">Password</label>
-                                                <input onKeyDown={ (e)=> loginTest(e)} type="password" className="form-control" id="loginPassword" />
+                                                <div className="position-relative">
+                                                    <input onKeyDown={(e) => loginEnter(e)} type="password" className="form-control" id="loginPassword" />  
+                                                    <i onClick={(e) => showPassword(e, loginPassword)} className="iconPass bi bi-eye-fill"></i>
+                                                </div>
                                             </div>
                                             <div className="my-5 d-flex justify-content-center">
-                                                <button onClick={() => { signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).then((userCredential) => { const user = userCredential.user }).catch((err) => setLoginMessage("Email o Password errate, Riprova")) }} type="submit" className="btn-reg-login">LogIn</button>
+                                                <button onClick={() => { signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value).catch((err) => setLoginMessage("Email o Password errate, Riprova")) }} type="submit" className="btn-reg-login">LogIn</button>
                                             </div>
 
 

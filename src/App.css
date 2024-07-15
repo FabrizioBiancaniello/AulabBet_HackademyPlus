@@ -205,6 +205,13 @@ body {
   text-shadow: 1px 1px 5px black;
   padding: 5px 20px;
 }
+.iconPass{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: larger;
+}
 
 .btn-logout:hover {
   opacity: .8;
