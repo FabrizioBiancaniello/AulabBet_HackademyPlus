@@ -34,7 +34,7 @@ export default function ContainerBets({ bets, updateVote, utente, notVoted }) {
         <div className="container my-5">
             <h2 className="display-4 text-center my-5 border-bottom secondary-title">BET ATTIVE</h2>
             <div className="row">
-                <div className="col-12">
+                {currentBets?.length > 9 && <div className="col-12">
                     <div aria-label="Page navigation example">
                         <ul className="pagination">
                             <li className="page-item">
@@ -56,6 +56,7 @@ export default function ContainerBets({ bets, updateVote, utente, notVoted }) {
                         </ul>
                     </div>
                 </div>
+                }
                 {currentBets && currentBets.map((bet) => (
                     <Card key={bet.id} bet={bet} updateVote={updateVote} utente={utente} notVoted={notVoted} />
                 ))}
